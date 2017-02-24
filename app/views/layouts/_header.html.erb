@@ -1,16 +1,22 @@
 <nav class="">
-    <h3>Welcome to Flavor Flaves. The illest recipe app on the web! </h3>
-    <% if user_signed_in? %>
-      <h4>Signed in as <%= "#{current_user.email}" %></h3>
-    <% end %>
-
-    <ul>
-        <li> <%= link_to "Home", root_path %> </li>
+    <div class="cf">
+        <h3>Welcome to Flavor Flaves. The illest recipe app on the web!</h3>
         <% if user_signed_in? %>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to "Sign In", new_user_session_path %></li>
-          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <h4>Signed in as <%= "#{current_user.email}" %></h3>
         <% end %>
-    </ul>
+        <%= image_tag "flav.jpg", alt: "Flava Flav" %>
+        <ul>
+            <li>
+                <%= link_to "Home", root_path %>
+            </li>
+            <% if user_signed_in? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <% end %>
+        </ul>
+
+    </div>
+
+
+
+
 </nav>
