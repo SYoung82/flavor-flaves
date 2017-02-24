@@ -6,11 +6,16 @@
         <% end %>
         <%= image_tag "flav.jpg", alt: "Flava Flav" %>
         <ul>
+          <% if !current_page?(:controller => 'recipes', :action => 'index') %>
             <li>
                 <%= link_to "Home", root_path %>
             </li>
+          <% end %>
             <% if user_signed_in? %>
-            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
             <% end %>
         </ul>
 
