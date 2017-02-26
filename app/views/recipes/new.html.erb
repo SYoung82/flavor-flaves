@@ -1,1 +1,7 @@
-New Recipe Page
+<%= form_for @recipe do |f| %>
+  <%= f.label "Title:" %><br />
+  <%= f.text_field :title %><br />
+  <%= f.label "Directions" %><br />
+  <%= f.text_area :directions, size: "40x15" %><br />
+  <%= f.submit "Create Recipe" %>
+<% end %>
