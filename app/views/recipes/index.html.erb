@@ -1,1 +1,15 @@
-Homepage
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <h3><%= recipe.title %></h3>
+      <ul>
+        <% recipe.ingredients.all.each do |ingredient| %>
+          <li>
+            <%= ingredient.name %>
+          </li>
+        <% end %>
+      </ul><br />
+      <%= recipe.directions %>
+    </li>
+  <% end %>
+</ul><br />
