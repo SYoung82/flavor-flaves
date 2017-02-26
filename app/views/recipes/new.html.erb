@@ -18,5 +18,6 @@
   <%= f.text_field :title %><br />
   <%= f.label "Directions" %><br />
   <%= f.text_area :directions, size: "40x15" %><br />
+  <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %><br />
   <%= f.submit "Create Recipe" %>
 <% end %>
