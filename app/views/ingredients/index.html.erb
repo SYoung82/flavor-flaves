@@ -1,1 +1,13 @@
-Ingredients Index Page
+<% if @recipe %>
+  <h3><%= @recipe.title + " Ingredients"%></h3>
+<% else %>
+  <h3>All Ingredients</h3>
+<% end %>
+
+<ul>
+  <% @ingredients.each do |ingredient| %>
+    <li>
+      <%= ingredient.name %>
+    </li>
+  <% end %>
+</ul>
