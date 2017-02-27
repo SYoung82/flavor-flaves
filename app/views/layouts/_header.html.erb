@@ -9,7 +9,7 @@
     <%= image_tag "flav.jpg", alt: "Flava Flav" %>
 
     <ul>
-      <% if !current_page?(root_path) %>
+      <% if !current_page?(recipes_path) %>
         <li>
             <%= link_to "Home", root_path %>
         </li>
@@ -17,7 +17,7 @@
 
       <% if user_signed_in? %>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <li><%= link_to "New Recipe", new_recipes_path %></li>
+        <li><%= link_to "New Recipe", new_recipe_path %></li>
       <% else %>
 
         <% if !current_page?(new_user_session_path) %>
