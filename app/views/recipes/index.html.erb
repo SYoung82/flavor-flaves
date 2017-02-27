@@ -1,15 +1,24 @@
-<ul>
-  <% @recipes.each do |recipe| %>
-    <li>
-      <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
-      <ul>
-        <% recipe.ingredients.all.each do |ingredient| %>
-          <li>
-            <%= ingredient.name %>
-          </li>
-        <% end %>
-      </ul><br />
-      <%= recipe.directions %>
-    </li>
-  <% end %>
-</ul><br />
+<form>
+  <%= select("ingredient", "name", Ingredient.all.collect(&:name), include_blank: 'Select an ingredient to filter') %>
+  <input type="submit" value="Filter" />
+</form>
+
+<% if @recipes.empty? %>
+  <h3>No matching recipes found!</h3>
+<% else %>
+  <ul>
+    <% @recipes.each do |recipe| %>
+      <li>
+        <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
+        <ul>
+          <% recipe.ingredients.all.each do |ingredient| %>
+            <li>
+              <%= ingredient.name %>
+            </li>
+          <% end %>
+        </ul><br />
+        <%= recipe.directions %>
+      </li>
+    <% end %>
+  </ul><br />  
+<% end %>
