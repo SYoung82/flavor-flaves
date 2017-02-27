@@ -33,3 +33,9 @@
 
 .cf img {float:left;}
 .cf div  {float:left;}
+
+.field_with_errors {
+  padding: 1px;
+  background-color: red;
+  display: table;
+}
