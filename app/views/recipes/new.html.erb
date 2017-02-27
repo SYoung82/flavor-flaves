@@ -19,11 +19,10 @@
   <%= f.label "Directions" %><br />
   <%= f.text_area :directions, size: "40x15" %><br />
   <%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %><br />
-  <% for ingredient in @recipe.ingredients %>
-    <%= fields_for "recipe[ingredients][][]", ingredient do |ingredient_form| %>
-      <p>
-        New Ingredient: <%= ingredient_form.text_field :name %>
-      </p>
+  <% 5.times do %>
+    <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
+      <%= ingredients_fields.label "New Ingredient:" %><br />
+      <%= ingredients_fields.text_field :name %><br />
     <% end %>
   <% end %>
   <%= f.submit "Create Recipe" %>
