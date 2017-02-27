@@ -1,31 +1,32 @@
 <nav class="">
-  <div class="cf">
-    <h3>Welcome to Flavor Flaves. The illest recipe app on the web!</h3>
+  <div class="cf header">
+    <p class="image"><%= image_tag "flav.jpg", alt: "Flava Flav" %></p>
+    <h3>Welcome to Flavor Flaves. The Illest Recipe App on the Web!</h3>
 
     <% if user_signed_in? %>
       <h4>Signed in as <%= "#{current_user.email}" %></h3>
     <% end %>
 
-    <%= image_tag "flav.jpg", alt: "Flava Flav" %>
+
 
     <ul>
       <% if !current_page?(recipes_path) %>
-        <li>
+        <li class="inline">
             <%= link_to "Home", root_path %>
         </li>
       <% end %>
 
       <% if user_signed_in? %>
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <li><%= link_to "New Recipe", new_recipe_path %></li>
+        <li class="inline"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <li class="inline"><%= link_to "New Recipe", new_recipe_path %></li>
       <% else %>
 
         <% if !current_page?(new_user_session_path) %>
-          <li><%= link_to "Sign In", new_user_session_path %></li>
+          <li class="inline"><%= link_to "Sign In", new_user_session_path %></li>
         <% end %>
 
         <% if !current_page?(new_user_registration_path) %>
-          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li class="inline"><%= link_to "Sign Up", new_user_registration_path %></li>
         <% end %>
 
       <% end %>

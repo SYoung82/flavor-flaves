@@ -39,3 +39,23 @@
   background-color: red;
   display: table;
 }
+
+ul { overflow: hidden; }
+
+.inline { display: inline; }
+
+.center {
+    margin: auto;
+    width: 80%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.header {
+  margin: auto;
+  width: 60%;
+}
+
+.image {
+  margin: auto;
+}
