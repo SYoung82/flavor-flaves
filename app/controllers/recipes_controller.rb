@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
 
   def index
-    if params[:ingredient]
+    if params[:ingredient] && params[:ingredient][:name] != ""
       @recipes = Ingredient.find_by(name: params[:ingredient][:name]).recipes.all
    else
       @recipes = Recipe.all
