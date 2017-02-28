@@ -1,4 +1,8 @@
-<h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
+<% if current_user.recipes.find_by(id: recipe.id) %>
+  <h3><%= link_to recipe.title, recipe_path(recipe) %> <%= image_tag "saved.png", alt: "Saved" %></h3>
+<% else %>
+  <h3><%= link_to recipe.title, recipe_path(recipe) %></h3>
+<% end %>
 <ul>
   <% recipe.ingredients.all.each do |ingredient| %>
     <li>
