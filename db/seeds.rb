@@ -39,3 +39,6 @@ recipe_ingredient8 = RecipeIngredient.create(recipe_id: 2, ingredient_id: 8, qua
 recipe_ingredient9 = RecipeIngredient.create(recipe_id: 2, ingredient_id: 9, quantity: "1 medium")
 recipe_ingredient10 = RecipeIngredient.create(recipe_id: 2, ingredient_id: 10, quantity: "4 leaves")
 recipe_ingredient11 = RecipeIngredient.create(recipe_id: 2, ingredient_id: 11, quantity: "4")
+
+user_recipe1 = UserRecipe.create(user_id: 1, recipe_id: 1)
+user_recipe2 = UserRecipe.create(user_id: 2, recipe_id: 2)
