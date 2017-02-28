@@ -1,0 +1,5 @@
+<h3><%= @user.email %>'s Saved Recipes</h3>
+
+<% @recipes.each do |recipe| %>
+  <%= render 'recipes/recipe', :recipe => recipe %>
+<% end %>
