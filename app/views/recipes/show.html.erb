@@ -2,7 +2,7 @@
 <ul>
   <% @recipe.ingredients.all.each do |ingredient| %>
     <li>
-      <%= ingredient.name %>
+      <%= ingredient.name %>, <%= @recipe.recipe_ingredients.find_by(ingredient_id: ingredient.id).quantity %>
     </li>
   <% end %>
 </ul><br />

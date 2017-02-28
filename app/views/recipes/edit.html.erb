@@ -25,7 +25,10 @@
   <p><% 5.times do %>
     <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
       <%= ingredients_fields.label "New Ingredient:" %><br />
-      <%= ingredients_fields.text_field :name %><br />
+      <%= ingredients_fields.text_field :name, :placeholder => "Name" %>
+      <%= f.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |recipe_ingredients_fields| %>
+        <%= recipe_ingredients_fields.text_field :quantity, :placeholder => "Quantity, Ex: '1 tbsp'"%><br />
+      <% end %>
     <% end %>
   <% end %></p>
 
