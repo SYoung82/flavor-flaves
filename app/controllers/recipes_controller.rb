@@ -29,7 +29,14 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
+    binding.pry
+    if params[:user_id] && params[:id]
+      UserRecipe.create(user_id: params[:user_id], recipe_id: params[:id])
+
+      redirect_to root_path
+    else
+      @recipe = Recipe.find(params[:id])
+    end
   end
 
   def update
