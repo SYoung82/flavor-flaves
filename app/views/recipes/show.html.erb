@@ -1,11 +1,5 @@
-<h3><%= @recipe.title %></h3>
-<ul>
-  <% @recipe.ingredients.all.each do |ingredient| %>
-    <li>
-      <%= ingredient.name %>, <%= @recipe.recipe_ingredients.find_by(ingredient_id: ingredient.id).quantity %>
-    </li>
-  <% end %>
-</ul><br />
+<%= render 'recipe', :recipe => @recipe %>
+<br />
 <%= simple_format @recipe.directions %><br />
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %><br />
 <%= link_to "Back", root_path %>
