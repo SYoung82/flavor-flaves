@@ -3,9 +3,9 @@ class Recipe < ApplicationRecord
   validates :title, :directions, presence: true
 
   has_many :recipe_ingredients
-  has_many :ingredients, through: :recipe_ingredients
+  has_many :ingredients, through: :recipe_ingredients, dependent: :destroy
   has_many :user_recipes
-  has_many :users, through: :user_recipes
+  has_many :users, through: :user_recipes, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true
 
