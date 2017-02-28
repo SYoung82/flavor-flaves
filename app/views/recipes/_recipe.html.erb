@@ -10,4 +10,6 @@
 
 <% if current_user.recipes.find_by(id: recipe.id) == nil %>
   <%= link_to "Save Recipe", edit_user_recipe_path(current_user, recipe) %>
+<% else %>
+  <%= link_to "Unsave Recipe", edit_user_recipe_path(current_user, recipe) %>
 <% end %>

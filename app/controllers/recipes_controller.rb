@@ -29,11 +29,15 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    binding.pry
     if params[:user_id] && params[:id]
-      UserRecipe.create(user_id: params[:user_id], recipe_id: params[:id])
-
-      redirect_to root_path
+      ur = UserRecipe.find_by(user_id: params[:user_id], recipe_id: params[:id])
+      if ur
+        ur.destroy
+        redirect_to root_path
+      else
+        UserRecipe.create(user_id: params[:user_id], recipe_id: params[:id])
+        redirect_to root_path
+      end
     else
       @recipe = Recipe.find(params[:id])
     end
