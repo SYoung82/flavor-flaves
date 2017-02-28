@@ -5,17 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-ingredient1 = Ingredient.create(name: "Vegetable Oil", measurement: "tablespoon")
-ingredient2 = Ingredient.create(name: "Brocollie Florets", measurement: "cup")
-ingredient3 = Ingredient.create(name: "Bell Pepper", measurement: "")
-ingredient4 = Ingredient.create(name: "Carrot", measurement: "")
-ingredient5 = Ingredient.create(name: "Soy Sauce", measurement: "tablespoon")
-ingredient6 = Ingredient.create(name: "Minced Garlic", measurement: "teaspoon")
-ingredient7 = Ingredient.create(name: "Ground Beef", measurement: "lb")
-ingredient8 = Ingredient.create(name: "Cheddar Cheese", measurement: "slice")
-ingredient9 = Ingredient.create(name: "Tomato", measurement: "")
-ingredient10 = Ingredient.create(name: "Lettuce", measurement: "leaf")
-ingredient11 = Ingredient.create(name: "Bun", measurement: "")
+ingredient1 = Ingredient.create(name: "Vegetable Oil")
+ingredient2 = Ingredient.create(name: "Brocollie Florets")
+ingredient3 = Ingredient.create(name: "Bell Pepper")
+ingredient4 = Ingredient.create(name: "Carrot")
+ingredient5 = Ingredient.create(name: "Soy Sauce")
+ingredient6 = Ingredient.create(name: "Minced Garlic")
+ingredient7 = Ingredient.create(name: "Ground Beef")
+ingredient8 = Ingredient.create(name: "Cheddar Cheese")
+ingredient9 = Ingredient.create(name: "Tomato")
+ingredient10 = Ingredient.create(name: "Lettuce")
+ingredient11 = Ingredient.create(name: "Bun")
 
 recipe1 = Recipe.create(title: "Vegetable Stir Fry", directions: "Heat vegetable oil in a large wok or skillet over
                                                                   medium heat.  Add brocolli, bell pepper, carrot, and garlic.
