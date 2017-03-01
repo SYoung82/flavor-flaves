@@ -8,6 +8,7 @@ class Recipe < ApplicationRecord
   has_many :users, through: :user_recipes, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true
+  accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
   def ingredients_attributes=(ingredient_attributes)
     ingredient_attributes.values.each do |ingredient_attribute|

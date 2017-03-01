@@ -1,4 +1,4 @@
-<% if request.env['PATH_INFO'] != "/users/#{current_user.id}/recipes" %>
+<% if current_user && request.env['PATH_INFO'] != "/users/#{current_user.id}/recipes" %>
   <form>
     <%= select("ingredient", "name", Ingredient.all.collect(&:name), include_blank: 'Select an ingredient to filter') %>
     <input type="submit" value="Filter" />
