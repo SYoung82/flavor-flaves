@@ -7,7 +7,9 @@
 <ul>
   <% @ingredients.each do |ingredient| %>
     <li>
-      <%= ingredient.name %>
+      <%= ingredient.name %>, <%= RecipeIngredient.find_by(ingredient_id: ingredient.id, recipe_id: @recipe.id).quantity %>
+      <%= link_to "Edit Quantity", edit_recipe_ingredient_path(@recipe, ingredient) %>
+      <%= link_to "Delete Ingredient" %>
     </li>
   <% end %>
 </ul>

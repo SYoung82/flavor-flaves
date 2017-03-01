@@ -7,4 +7,23 @@ class IngredientsController < ApplicationController
       @ingredients = Ingredient.all
     end
   end
+
+  def edit
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = Ingredient.find(params[:id])
+    @recipe_ingredient = RecipeIngredient.find_by(recipe_id: @recipe.id, ingredient_id: @ingredient.id)
+  end
+
+  def update
+    @recipe_ingredient = RecipeIngredient.find_by(recipe_id: params[:recipe_id], ingredient_id: params[:id])
+    @recipe_ingredient.update(ingredient_params)
+    @recipe_ingredient.save
+    redirect_to recipe_ingredients_path(recipe_id: params[:recipe_id])
+  end
+
+  private
+
+  def ingredient_params
+    params.require(:recipe_ingredient).permit(:quantity)
+  end
 end

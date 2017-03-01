@@ -1,0 +1,11 @@
+<h3><%= @recipe.title %></h3>
+<p>
+  <%= @ingredient.name %>
+  <%= form_for :recipe_ingredient do |f| %>
+    <%= f.label "Quantity: " %>
+    <%= f.text_field :quantity %>
+    <%= f.submit "Update Quantity" %>
+  <% end %>
+</p>
+
+<%= link_to "Back", recipe_ingredients_path(@recipe) %>

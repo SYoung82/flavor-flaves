@@ -1,3 +1,4 @@
 <%= render 'recipe', :recipe => @recipe %>
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %><br />
+<%= link_to "Manage Ingredients", recipe_ingredients_path(@recipe) %><br />
 <%= link_to "Back", root_path %>

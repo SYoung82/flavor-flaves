@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   root "recipes#index"
 
   get "/auth/:provider/callback" => "recipes#index"
+
+  post "recipes/:recipe_id/ingredients/:id/edit" => "ingredients#update"
 end
