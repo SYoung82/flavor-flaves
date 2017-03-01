@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  include RecipesHelper
+
   before_action :authenticate_user!, :except => [:index]
 
   def index
@@ -22,14 +24,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
-      recipe_params[:ingredients_attributes].each do |ingredient_index|
-        if recipe_params[:ingredients_attributes][ingredient_index][:name] != ""
-          ingredient = Ingredient.find_by(name: recipe_params[:ingredients_attributes][ingredient_index][:name])
-          recipe_ingredient = RecipeIngredient.find_by(recipe_id: @recipe.id, ingredient_id: ingredient.id)
-          recipe_ingredient.quantity = recipe_params[:ingredients_attributes][ingredient_index][:recipe_ingredients_attributes][ingredient_index][:quantity]
-          recipe_ingredient.save
-        end
-      end
+      build_recipe_ingredients(recipe_params)
       redirect_to root_path
     else
       render :new
