@@ -25,6 +25,7 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       build_recipe_ingredients(recipe_params)
+      build_default_quantities(@recipe)
       redirect_to root_path
     else
       render :new

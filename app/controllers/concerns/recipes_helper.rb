@@ -5,7 +5,17 @@ module RecipesHelper
       if recipe_params[:ingredients_attributes][ingredient_index][:name] != ""
         ingredient = Ingredient.find_by(name: recipe_params[:ingredients_attributes][ingredient_index][:name])
         recipe_ingredient = RecipeIngredient.find_by(recipe_id: @recipe.id, ingredient_id: ingredient.id)
-        recipe_ingredient.quantity = recipe_params[:ingredients_attributes][ingredient_index][:recipe_ingredients_attributes][ingredient_index][:quantity]
+        recipe_ingredient.quantity = recipe_params[:ingredients_attributes][ingredient_index][:recipe_ingredients_attributes]["0"][:quantity]
+        recipe_ingredient.save
+      end
+    end
+  end
+
+  def build_default_quantities(recipe)
+    recipe.recipe_ingredients.each do |recipe_ingredient|
+      binding.pry
+      if(recipe_ingredient.quantity == nil)
+        recipe_ingredient.quantity = '1'
         recipe_ingredient.save
       end
     end
