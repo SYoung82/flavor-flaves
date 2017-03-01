@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :recipes
   end
 
-  resources :ingredients
+  get '*path' => redirect('/')
 
   root "recipes#index"
 
