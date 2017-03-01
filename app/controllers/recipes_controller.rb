@@ -4,8 +4,8 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
 
   def index
-    if params[:user_id]
-      @recipes = User.find_by(params[:id]).recipes
+    if params[:user_id] && params[:user_id] == current_user.id.to_s
+      @recipes = current_user.recipes
     elsif params[:ingredient] && params[:ingredient][:name] != ""
       @recipes = Ingredient.find_by(name: params[:ingredient][:name]).recipes.all
     else
@@ -43,6 +43,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
+      build_default_quantities(@recipe)
       redirect_to recipe_path(@recipe)
     else
       render :edit
