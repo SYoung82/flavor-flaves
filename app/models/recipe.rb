@@ -8,14 +8,14 @@ class Recipe < ApplicationRecord
   has_many :users, through: :user_recipes, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true
-  accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
   def ingredients_attributes=(ingredient_attributes)
     ingredient_attributes.values.each do |ingredient_attribute|
       if ingredient_attribute[:name] != ""
-        ingredient = Ingredient.find_or_create_by(ingredient_attribute)
+        ingredient = Ingredient.find_or_create_by(name: ingredient_attribute[:name])
         self.ingredients << ingredient
       end
     end
   end
+
 end
