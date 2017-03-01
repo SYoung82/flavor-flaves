@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Flavor Flaves
+A Recipe Manager app built using Rails.
 
-Things you may want to cover:
+## Installation
+Fork the repo.
+Run `bundle install` to install necessary gems.
+Run 'rake db:migrate' to create the database.
+A small seed file is included.  Run 'rake db:seed' to populate the database.
 
-* Ruby version
+## Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/SYoung82/flavor-flaves. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+The application is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
