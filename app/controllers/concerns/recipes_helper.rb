@@ -13,7 +13,6 @@ module RecipesHelper
 
   def build_default_quantities(recipe)
     recipe.recipe_ingredients.each do |recipe_ingredient|
-      binding.pry
       if(recipe_ingredient.quantity == nil)
         recipe_ingredient.quantity = '1'
         recipe_ingredient.save
