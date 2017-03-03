@@ -9,7 +9,7 @@ class Recipe < ApplicationRecord
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true
 
-  scope :most_popular, -> { joins(:user_recipes).group(:recipe_id).count }
+  scope :most_popular, -> (limit) { joins(:user_recipes).group(:recipe_id).limit(limit).count }
 
   def ingredients_attributes=(ingredient_attributes)
     ingredient_attributes.values.each do |ingredient_attribute|
