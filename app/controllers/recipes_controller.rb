@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       build_recipe_ingredients(recipe_params)
       build_default_quantities(@recipe)
-      redirect_to root_path
+      redirect_to recipe_ingredients_path(@recipe)
     else
       render :new
     end
