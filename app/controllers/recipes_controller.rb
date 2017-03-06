@@ -43,6 +43,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
+      build_recipe_ingredients(recipe_params)
       build_default_quantities(@recipe)
       redirect_to recipe_path(@recipe)
     else

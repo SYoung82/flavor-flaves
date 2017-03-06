@@ -11,7 +11,7 @@ class Recipe < ApplicationRecord
 
   #most_popular returns all most popular recipes based on saves, number of saves can be accessed via
   #recipe.attributes['user_count']
-  scope :most_popular, -> (limit=1) { joins(:user_recipes).group(:recipe_id).limit(limit).select('recipes.*, count(recipe_id) as user_count') }
+  scope :most_popular, -> (limit=1) { joins(:user_recipes).group(:recipe_id).order('count(recipe_id) desc').select('recipes.*, count(recipe_id) as user_count') }
 
   def ingredients_attributes=(ingredient_attributes)
     ingredient_attributes.values.each do |ingredient_attribute|
