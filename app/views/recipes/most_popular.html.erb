@@ -1,0 +1,9 @@
+<h3>Top 5 Most Popular Recipes</h3>
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <%= render 'recipe', :recipe => recipe %>
+      <h4>Saved <%= recipe.attributes['user_count'] %> time(s).</h4>
+    </li>
+  <% end %>
+</ul>

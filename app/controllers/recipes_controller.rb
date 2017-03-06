@@ -50,6 +50,10 @@ class RecipesController < ApplicationController
     end
   end
 
+  def most_popular
+    @recipes = Recipe.most_popular(5)
+  end
+
   private
 
   def recipe_params

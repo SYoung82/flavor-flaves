@@ -11,11 +11,13 @@ Rails.application.routes.draw do
     resources :recipes
   end
 
-  get '*path' => redirect('/')
+  get "/most_popular" => "recipes#most_popular", as: 'most_popular'
 
   root "recipes#index"
 
   get "/auth/:provider/callback" => "recipes#index"
 
   post "recipes/:recipe_id/ingredients/:id/edit" => "ingredients#update"
+
+  get '*path' => redirect('/')
 end
