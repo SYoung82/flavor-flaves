@@ -40,7 +40,7 @@ class RecipesController < ApplicationController
     else
       @recipe = Recipe.find(params[:id])
       if @recipe.user_id != current_user[:id]
-        flash[:notice] = "You cannot edit this recipe."
+        flash[:notice] = "You cannot edit this recipe. You did not create it."
         redirect_to recipe_path(@recipe)
       end
     end
@@ -59,6 +59,14 @@ class RecipesController < ApplicationController
 
   def most_popular
     @recipes = Recipe.most_popular(5)
+  end
+
+  def submitted_recipes
+    @recipes = Recipe.where(user_id: current_user[:id])
+    if @recipes.count == 0
+      flash[:notice] = "You've not submitted any recipes. Click New Recipe link to get started."
+      redirect_to :root
+    end
   end
 
   private

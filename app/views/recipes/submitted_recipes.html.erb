@@ -1,0 +1,8 @@
+<h3><%= current_user.email %>'s Submitted Recipes</h3>
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <%= render 'recipe', :recipe => recipe %>
+    </li>
+  <% end %>
+</ul>

@@ -21,6 +21,7 @@
         <li class="inline"><%= link_to "New Recipe", new_recipe_path %></li>
         <li class="inline"><%= link_to "Your Saved Recipes", user_recipes_path(current_user) %></li>
         <li class="inline"><%= link_to "Top 5 Recipes", most_popular_path %></li>
+        <li class="inline"><%= link_to "Your Submitted Recipes", submitted_recipes_path%></li>
       <% else %>
 
         <% if !current_page?(new_user_session_path) %>

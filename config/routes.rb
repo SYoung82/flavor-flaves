@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get "/most_popular" => "recipes#most_popular", as: 'most_popular'
 
+  get "/submitted_recipes" => "recipes#submitted_recipes", as: 'submitted_recipes'
+
   root "recipes#index"
 
   get "/auth/:provider/callback" => "recipes#index"
