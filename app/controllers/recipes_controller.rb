@@ -22,7 +22,9 @@ class RecipesController < ApplicationController
   end
 
   def create
+    binding.pry
     @recipe = current_user.recipes.build(recipe_params)
+    @recipe.user_id = current_user[:id]
     if @recipe.save
       build_recipe_ingredients(recipe_params)
       build_default_quantities(@recipe)
@@ -37,12 +39,16 @@ class RecipesController < ApplicationController
       create_or_destroy_user_recipe(params)
     else
       @recipe = Recipe.find(params[:id])
+      if @recipe.user_id != current_user[:id]
+        flash[:notice] = "You cannot edit this recipe."
+        redirect_to recipe_path(@recipe)
+      end
     end
   end
 
   def update
     @recipe = Recipe.find(params[:id])
-    if @recipe.update(recipe_params)
+    if @recipe.user_id == current_user[:id] && @recipe.update(recipe_params)
       build_recipe_ingredients(recipe_params)
       build_default_quantities(@recipe)
       redirect_to recipe_path(@recipe)
@@ -60,6 +66,7 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title,
                                   :directions,
+                                  :user_id,
                                   ingredient_ids:[],
                                   ingredients_attributes: [:name, recipe_ingredients_attributes: [:quantity]])
   end
