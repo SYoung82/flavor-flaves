@@ -24,10 +24,16 @@ module RecipesHelper
     ur = UserRecipe.find_by(user_id: params[:user_id], recipe_id: params[:id])
     if ur
       ur.destroy
-      redirect_to root_path
+      respond_to do |f|
+        f.html { redirect_to root_path }
+        f.json { render json: @recipes }
+      end
     else
       UserRecipe.create(user_id: params[:user_id], recipe_id: params[:id])
-      redirect_to root_path
+      respond_to do |f|
+        f.html { redirect_to root_path }
+        f.json { render json: current_user.recipes.last }
+      end
     end
   end
 end

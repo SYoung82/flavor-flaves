@@ -1,9 +1,11 @@
 var save = function(event) {
+    console.log("In save()");
     //Try to save recipe to user
     recipeEditURL = $(event.target).parent()[0].pathname;
     queryDB(recipeEditURL);
     //If successful change image to solid star
-
+//TODO TODO TODO
+    debugger;
     //Else alert user unsuccsesful save
 }
 
@@ -34,16 +36,15 @@ var attachListeners = function() {
     //     alert("Submitted click");
     // });
 
-    $("img[alt='Saved']").click(function(event) {
-        event.preventDefault();
-
-        alert("Star clicked");
-    })
+    // $("img[alt='Saved']").click(function(event) {
+    //     event.preventDefault();
+    //     save(event);
+    //     alert("Delete Successful");
+    // })
 
     $("img[alt='Unsaved']").click(function(event) {
         event.preventDefault();
         save(event);
-        alert("Empty star clicked");
     })
 }
 
@@ -55,24 +56,36 @@ $(function() {
 ////////////////////////////////////////////////////////////////
 //AJAX queries
 ////////////////////////////////////////////////////////////////
+var ajaxGet = function(url) {
+  object = $.ajax({
+    url: url,
+    method: "GET",
+    dataType: "json"
+  });
+  console.log(object.responseText);
+  return object.responseText;
+}
 
-var ajaxSave = function(recipeId) {
+var ajaxSave = function(url) {
+  console.log("Inside ajaxSave()");
     $.ajax({
-      url: "recipes/" + recipeId,
-      method: "PATCH",
+      url: url,
+      method: "GET",
       dataType: "json",
-      data: {
-        recipe:
+      success: function(data) {
+        console.log("Successful save");
+        return true;
       }
-    })
+    });
+    return false;
 }
 
 var queryDB = function(url) {
+  console.log("Inside queryDB");
   //Determine the type of query based on caller function
   query = arguments.callee.caller.name;
   if(query == "save"){
-    ajaxSave(url);
+    return ajaxSave(url);
   }
-  //debugger;
-  return true;
+  return false;
 }
