@@ -1,3 +1,12 @@
+var save = function(event) {
+    //Try to save recipe to user
+    recipeId = $(event.target).parent().parent()[0].id
+    queryDB(recipeId);
+    //If successful change image to solid star
+
+    //Else alert user unsuccsesful save
+}
+
 var attachListeners = function() {
     //Attach listeners for ???
     // $("#home a").click(function(event) {
@@ -27,11 +36,13 @@ var attachListeners = function() {
 
     $("img[alt='Saved']").click(function(event) {
         event.preventDefault();
+
         alert("Star clicked");
     })
 
     $("img[alt='Unsaved']").click(function(event) {
         event.preventDefault();
+        save(event);
         alert("Empty star clicked");
     })
 }
@@ -39,3 +50,12 @@ var attachListeners = function() {
 $(function() {
     attachListeners();
 });
+
+
+////////////////////////////////////////////////////////////////
+//AJAX queries
+////////////////////////////////////////////////////////////////
+var queryDB = function(recipeId) {
+  debugger;
+  return true;
+}
