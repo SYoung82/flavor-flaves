@@ -2,10 +2,13 @@ var save = function(event) {
     console.log("In save()");
     //Try to save recipe to user
     recipeEditURL = $(event.target).parent()[0].pathname;
-    queryDB(recipeEditURL);
+    queryDB(recipeEditURL)
     //If successful change image to solid star
-//TODO TODO TODO
+    $(event.target)[0].alt = "Saved";
+    d = new Date();
+    $(event.target)[0].src = "/assets/saved-" + d.getTime() + ".png";
     debugger;
+
     //Else alert user unsuccsesful save
 }
 
