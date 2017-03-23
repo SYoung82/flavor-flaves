@@ -11,7 +11,7 @@
 
     <ul>
       <% if !current_page?(recipes_path) %>
-        <li class="inline">
+        <li id="home" class="inline">
             <%= link_to "Home", root_path %>
         </li>
       <% end %>
@@ -19,9 +19,9 @@
       <% if user_signed_in? %>
         <li class="inline"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         <li class="inline"><%= link_to "New Recipe", new_recipe_path %></li>
-        <li class="inline"><%= link_to "Your Saved Recipes", user_recipes_path(current_user) %></li>
-        <li class="inline"><%= link_to "Top 5 Recipes", most_popular_path %></li>
-        <li class="inline"><%= link_to "Your Submitted Recipes", submitted_recipes_path%></li>
+        <li id="saved" class="inline"><%= link_to "Your Saved Recipes", user_recipes_path(current_user) %></li>
+        <li id="top5" class="inline"><%= link_to "Top 5 Recipes", most_popular_path %></li>
+        <li id="submitted" class="inline"><%= link_to "Your Submitted Recipes", submitted_recipes_path%></li>
       <% else %>
 
         <% if !current_page?(new_user_session_path) %>
