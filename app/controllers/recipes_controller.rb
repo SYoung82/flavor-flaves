@@ -11,10 +11,18 @@ class RecipesController < ApplicationController
     else
       @recipes = Recipe.all
     end
+    respond_to do |f|
+      f.html { render :index }
+      f.json { render json: @recipes }
+    end
   end
 
   def show
     @recipe = Recipe.find(params[:id])
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @recipe }
+    end
   end
 
   def new
@@ -22,7 +30,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    binding.pry
     @recipe = current_user.recipes.build(recipe_params)
     @recipe.user_id = current_user[:id]
     if @recipe.save
