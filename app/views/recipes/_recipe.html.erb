@@ -1,5 +1,5 @@
 <% if current_user && current_user.recipes.find_by(id: recipe.id) %>
-  <h3><%= link_to recipe.title, recipe_path(recipe) %> <%= link_to (image_tag "saved.png", alt: "Saved"), edit_user_recipe_path(current_user, recipe) %></h3>
+  <h3 id="saved"><%= link_to recipe.title, recipe_path(recipe) %> <%= link_to (image_tag "saved.png", alt: "Saved"), edit_user_recipe_path(current_user, recipe) %></h3>
 <% elsif current_user %>
   <h3><%= link_to recipe.title, recipe_path(recipe) %> <%= link_to (image_tag "unsaved.png", alt: "Unsaved"), edit_user_recipe_path(current_user, recipe) %></h3>
 <% else %>
