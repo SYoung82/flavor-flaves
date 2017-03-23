@@ -3,11 +3,15 @@ var save = function(event) {
     //Try to save recipe to user
     recipeEditURL = $(event.target).parent()[0].pathname;
     queryDB(recipeEditURL)
-    //If successful change image to solid star
-    $(event.target)[0].alt = "Saved";
-    d = new Date();
-    $(event.target)[0].src = "/assets/saved-" + d.getTime() + ".png";
-    debugger;
+    
+    //Switch image
+    if($(event.target)[0].alt == "Unsaved"){
+      $(event.target)[0].alt = "Saved";
+      $(event.target)[0].src = "/assets/saved.png";
+    }else {
+      $(event.target)[0].alt = "Unsaved";
+      $(event.target)[0].src = "/assets/unsaved.png";
+    }
 
     //Else alert user unsuccsesful save
 }
@@ -39,11 +43,10 @@ var attachListeners = function() {
     //     alert("Submitted click");
     // });
 
-    // $("img[alt='Saved']").click(function(event) {
-    //     event.preventDefault();
-    //     save(event);
-    //     alert("Delete Successful");
-    // })
+    $("img[alt='Saved']").click(function(event) {
+        event.preventDefault();
+        save(event);
+    })
 
     $("img[alt='Unsaved']").click(function(event) {
         event.preventDefault();
