@@ -1,7 +1,7 @@
 var save = function(event) {
     //Try to save recipe to user
-    recipeId = $(event.target).parent().parent()[0].id
-    queryDB(recipeId);
+    recipeEditURL = $(event.target).parent()[0].pathname;
+    queryDB(recipeEditURL);
     //If successful change image to solid star
 
     //Else alert user unsuccsesful save
@@ -55,7 +55,24 @@ $(function() {
 ////////////////////////////////////////////////////////////////
 //AJAX queries
 ////////////////////////////////////////////////////////////////
-var queryDB = function(recipeId) {
-  debugger;
+
+var ajaxSave = function(recipeId) {
+    $.ajax({
+      url: "recipes/" + recipeId,
+      method: "PATCH",
+      dataType: "json",
+      data: {
+        recipe:
+      }
+    })
+}
+
+var queryDB = function(url) {
+  //Determine the type of query based on caller function
+  query = arguments.callee.caller.name;
+  if(query == "save"){
+    ajaxSave(url);
+  }
+  //debugger;
   return true;
 }
