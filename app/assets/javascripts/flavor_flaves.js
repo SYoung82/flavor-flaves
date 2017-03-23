@@ -3,7 +3,7 @@ var save = function(event) {
     //Try to save recipe to user
     recipeEditURL = $(event.target).parent()[0].pathname;
     queryDB(recipeEditURL)
-    
+
     //Switch image
     if($(event.target)[0].alt == "Unsaved"){
       $(event.target)[0].alt = "Saved";
@@ -54,7 +54,7 @@ var attachListeners = function() {
     })
 }
 
-$(function() {
+$(document).ready(function() {
     attachListeners();
 });
 
