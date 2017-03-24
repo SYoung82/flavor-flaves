@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
 
   def index
+    binding.pry
     if params[:user_id] && params[:user_id] == current_user.id.to_s
       @recipes = current_user.recipes
     elsif params[:ingredient] && params[:ingredient][:name] != ""

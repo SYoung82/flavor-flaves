@@ -20,11 +20,11 @@ var attachListeners = function() {
     //     alert("Submitted click");
     // });
 
-    //
-    // $("#ingredients_filter_submit").click(function(event) {
-    //     event.preventDefault();
-    //     alert("Filter click");
-    // });
+
+    $("#ingredients_filter").submit(function(event) {
+        event.preventDefault();
+        filter(event);
+    });
 
     $("img[alt='Saved']").click(function(event) {
         event.preventDefault();
@@ -40,6 +40,13 @@ var attachListeners = function() {
 $(document).ready(function() {
     attachListeners();
 });
+
+var filter = function(event) {
+  filterIngredient = $("select#ingredient_name").val();
+  if(filterIngredient != "") {
+
+  }
+}
 
 var save = function(event) {
     //Try to save recipe to user
