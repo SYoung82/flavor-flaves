@@ -20,7 +20,6 @@ var attachListeners = function() {
     //     alert("Submitted click");
     // });
 
-
     $("#ingredients_filter").submit(function(event) {
         event.preventDefault();
         filter(event);
@@ -42,10 +41,10 @@ $(document).ready(function() {
 });
 
 var filter = function(event) {
-  filterIngredient = $("select#ingredient_name").val();
-  if(filterIngredient != "") {
-    ajaxGetFiltered(filterIngredient);
-  }
+    filterIngredient = $("select#ingredient_name").val();
+    if (filterIngredient != "") {
+        ajaxGetFiltered(filterIngredient);
+    }
 }
 
 var save = function(event) {
@@ -54,66 +53,61 @@ var save = function(event) {
     queryDB(recipeEditURL)
 
     //Switch image
-    if($(event.target)[0].alt == "Unsaved"){
-      $(event.target)[0].alt = "Saved";
-      $(event.target)[0].src = "/assets/saved.png";
-    }else {
-      $(event.target)[0].alt = "Unsaved";
-      $(event.target)[0].src = "/assets/unsaved.png";
+    if ($(event.target)[0].alt == "Unsaved") {
+        $(event.target)[0].alt = "Saved";
+        $(event.target)[0].src = "/assets/saved.png";
+    } else {
+        $(event.target)[0].alt = "Unsaved";
+        $(event.target)[0].src = "/assets/unsaved.png";
     }
-
-    //Else alert user unsuccsesful save
 }
 
 ////////////////////////////////////////////////////////////////
 //AJAX queries
 ////////////////////////////////////////////////////////////////
 var ajaxGet = function(url) {
-  object = $.ajax({
-    url: url,
-    method: "GET",
-    dataType: "json"
-  });
-  return object.responseText;
+    object = $.ajax({url: url, method: "GET", dataType: "json"});
+    return object.responseText;
 }
 
 var ajaxGetFiltered = function(ingredient) {
-  object = $.ajax({
-    url: '/recipes',
-    method: "GET",
-    dataType: "json",
-    data: {
-      ingredient: {
-        name: ingredient
-      }
-    },
-    success: function(response) {
-      debugger;
-    },
-    error: function(err) {
-      console.log(err);
-    }
-  });
+    object = $.ajax({
+        url: '/recipes',
+        method: "GET",
+        dataType: "json",
+        data: {
+            ingredient: {
+                name: ingredient
+            }
+        },
+        success: function(response) {
+            //TODO TODO TODO  Handle response, display each recipe w/o reloading page
+            debugger;
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
 }
 
 var ajaxSave = function(url) {
     $.ajax({
-      url: url,
-      method: "GET",
-      dataType: "json",
-      success: function(data) {
-        console.log("Successful save");
-        return true;
-      }
+        url: url,
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+            console.log("Successful save");
+            return true;
+        }
     });
     return false;
 }
 
 var queryDB = function(url) {
-  //Determine the type of query based on caller function
-  query = arguments.callee.caller.name;
-  if(query == "save"){
-    return ajaxSave(url);
-  }
-  return false;
+    //Determine the type of query based on caller function
+    query = arguments.callee.caller.name;
+    if (query == "save") {
+        return ajaxSave(url);
+    }
+    return false;
 }
