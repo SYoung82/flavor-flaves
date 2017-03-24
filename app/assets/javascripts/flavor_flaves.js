@@ -1,31 +1,8 @@
-var save = function(event) {
-    console.log("In save()");
-    //Try to save recipe to user
-    recipeEditURL = $(event.target).parent()[0].pathname;
-    queryDB(recipeEditURL)
-
-    //Switch image
-    if($(event.target)[0].alt == "Unsaved"){
-      $(event.target)[0].alt = "Saved";
-      $(event.target)[0].src = "/assets/saved.png";
-    }else {
-      $(event.target)[0].alt = "Unsaved";
-      $(event.target)[0].src = "/assets/unsaved.png";
-    }
-
-    //Else alert user unsuccsesful save
-}
-
 var attachListeners = function() {
     //Attach listeners for ???
     // $("#home a").click(function(event) {
     //     event.preventDefault();
     //     alert("Home click");
-    // });
-    //
-    // $("#ingredients_filter_submit").click(function(event) {
-    //     event.preventDefault();
-    //     alert("Filter click");
     // });
     //
     // $("#saved").click(function(event) {
@@ -43,6 +20,12 @@ var attachListeners = function() {
     //     alert("Submitted click");
     // });
 
+    //
+    // $("#ingredients_filter_submit").click(function(event) {
+    //     event.preventDefault();
+    //     alert("Filter click");
+    // });
+
     $("img[alt='Saved']").click(function(event) {
         event.preventDefault();
         save(event);
@@ -58,6 +41,22 @@ $(document).ready(function() {
     attachListeners();
 });
 
+var save = function(event) {
+    //Try to save recipe to user
+    recipeEditURL = $(event.target).parent()[0].pathname;
+    queryDB(recipeEditURL)
+
+    //Switch image
+    if($(event.target)[0].alt == "Unsaved"){
+      $(event.target)[0].alt = "Saved";
+      $(event.target)[0].src = "/assets/saved.png";
+    }else {
+      $(event.target)[0].alt = "Unsaved";
+      $(event.target)[0].src = "/assets/unsaved.png";
+    }
+
+    //Else alert user unsuccsesful save
+}
 
 ////////////////////////////////////////////////////////////////
 //AJAX queries
@@ -68,12 +67,10 @@ var ajaxGet = function(url) {
     method: "GET",
     dataType: "json"
   });
-  console.log(object.responseText);
   return object.responseText;
 }
 
 var ajaxSave = function(url) {
-  console.log("Inside ajaxSave()");
     $.ajax({
       url: url,
       method: "GET",
@@ -87,7 +84,6 @@ var ajaxSave = function(url) {
 }
 
 var queryDB = function(url) {
-  console.log("Inside queryDB");
   //Determine the type of query based on caller function
   query = arguments.callee.caller.name;
   if(query == "save"){
