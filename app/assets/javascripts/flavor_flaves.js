@@ -44,7 +44,7 @@ $(document).ready(function() {
 var filter = function(event) {
   filterIngredient = $("select#ingredient_name").val();
   if(filterIngredient != "") {
-
+    ajaxGetFiltered(filterIngredient);
   }
 }
 
@@ -75,6 +75,25 @@ var ajaxGet = function(url) {
     dataType: "json"
   });
   return object.responseText;
+}
+
+var ajaxGetFiltered = function(ingredient) {
+  object = $.ajax({
+    url: '/recipes',
+    method: "GET",
+    dataType: "json",
+    data: {
+      ingredient: {
+        name: ingredient
+      }
+    },
+    success: function(response) {
+      debugger;
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  });
 }
 
 var ajaxSave = function(url) {
