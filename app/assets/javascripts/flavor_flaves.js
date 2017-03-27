@@ -1,3 +1,5 @@
+var user_id;
+
 var attachListeners = function() {
     //Attach listeners for ???
     // $("#home a").click(function(event) {
@@ -85,11 +87,9 @@ var ajaxGetFiltered = function(ingredient) {
             //return jQuery.parseJSON( response );
             console.log("Filter successful");
             $("#recipes").empty();
-            //debugger;
             response.forEach(function(recipe) {
                 var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title}</a>`;
-                htmlString += `<a href="/users"`
-                htmlString += `<ul>`;
+                htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit"></a></h3><ul>`
                 recipe.ingredients.forEach(function(ingredient) {
                     htmlString += `<li>${ingredient.name}, `;
                     recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
@@ -98,6 +98,7 @@ var ajaxGetFiltered = function(ingredient) {
                         }
                     });
                 });
+                htmlString += `</ul><br><p>${recipe.directions}</p>`;
                 htmlString += `</ul>`;
                 $("#recipes").append(htmlString);
             });
