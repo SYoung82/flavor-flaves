@@ -1,5 +1,3 @@
-var user_id;
-
 var attachListeners = function() {
     //Attach listeners for ???
     // $("#home a").click(function(event) {
@@ -72,6 +70,8 @@ var ajaxGet = function(url) {
     return object.responseText;
 }
 
+
+//TODO TODO TODO add star next to title of each recipe.
 var ajaxGetFiltered = function(ingredient) {
     object = $.ajax({
         url: '/recipes',
@@ -83,13 +83,19 @@ var ajaxGetFiltered = function(ingredient) {
             }
         },
         success: function(response) {
-            //TODO TODO TODO  Handle response, display each recipe w/o reloading page
-            //return jQuery.parseJSON( response );
-            console.log("Filter successful");
             $("#recipes").empty();
             response.forEach(function(recipe) {
-                var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title}</a>`;
-                htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit"></a></h3><ul>`
+                var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
+                htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit">`;
+                recipe.users.forEach(function(recipe_user) {
+                    if($(".current-user")[0].id == recipe_user.id) {
+                        htmlString += `<img alt="Saved" src="/assets/saved.png">`;
+                    }
+                });
+                if(!htmlString.includes("Saved")) {
+                    htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
+                }
+                htmlString += `</a></h3><ul>`
                 recipe.ingredients.forEach(function(ingredient) {
                     htmlString += `<li>${ingredient.name}, `;
                     recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
