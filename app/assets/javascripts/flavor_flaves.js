@@ -82,7 +82,26 @@ var ajaxGetFiltered = function(ingredient) {
         },
         success: function(response) {
             //TODO TODO TODO  Handle response, display each recipe w/o reloading page
-            debugger;
+            //return jQuery.parseJSON( response );
+            console.log("Filter successful");
+            $("#recipes").empty();
+            //debugger;
+            response.forEach(function(recipe) {
+                var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title}</a>`;
+                htmlString += `<a href="/users"`
+                htmlString += `<ul>`;
+                recipe.ingredients.forEach(function(ingredient) {
+                    htmlString += `<li>${ingredient.name}, `;
+                    recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
+                        if(recipe_ingredient.ingredient_id == ingredient.id) {
+                            htmlString += `${recipe_ingredient.quantity}</li>`;
+                        }
+                    });
+                });
+                htmlString += `</ul>`;
+                $("#recipes").append(htmlString);
+            });
+
         },
         error: function(err) {
             console.log(err);

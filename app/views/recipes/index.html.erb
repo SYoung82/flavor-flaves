@@ -8,7 +8,7 @@
 <% if @recipes.empty? %>
 <h3>No matching recipes found!</h3>
 <% else %>
-<ul>
+<ul id="recipes">
     <% @recipes.each do |recipe| %>
     <li>
         <%= render 'recipe', :recipe => recipe %>
