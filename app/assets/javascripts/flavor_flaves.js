@@ -65,6 +65,19 @@ var save = function(event) {
 ////////////////////////////////////////////////////////////////
 //AJAX queries
 ////////////////////////////////////////////////////////////////
+var ajaxShow = function(url) {
+    $.ajax({
+        url: url,
+        method: "GET",
+        dataType: "json"
+    }, success : function(response) {
+        console.log(response);
+        debugger;
+    }, error : function(response) {
+        console.log("Error finding recipe.");
+    });
+}
+
 var ajaxGet = function(url) {
     object = $.ajax({url: url, method: "GET", dataType: "json"});
     return object.responseText;
@@ -73,7 +86,7 @@ var ajaxGet = function(url) {
 
 //TODO TODO TODO add star next to title of each recipe.
 var ajaxGetFiltered = function(ingredient) {
-    object = $.ajax({
+    $.ajax({
         url: '/recipes',
         method: "GET",
         dataType: "json",
