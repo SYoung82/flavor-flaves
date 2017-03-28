@@ -129,28 +129,7 @@ var ajaxGetFiltered = function(ingredient) {
         success: function(response) {
             $("#recipes").empty();
             response.forEach(function(recipe) {
-                var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
-                htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit">`;
-                recipe.users.forEach(function(recipe_user) {
-                    if ($(".current-user")[0].id == recipe_user.id) {
-                        htmlString += `<img alt="Saved" src="/assets/saved.png">`;
-                    }
-                });
-                if (!htmlString.includes("Saved")) {
-                    htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
-                }
-                htmlString += `</a></h3><ul>`
-                recipe.ingredients.forEach(function(ingredient) {
-                    htmlString += `<li>${ingredient.name}, `;
-                    recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
-                        if (recipe_ingredient.ingredient_id == ingredient.id) {
-                            htmlString += `${recipe_ingredient.quantity}</li>`;
-                        }
-                    });
-                });
-                htmlString += `</ul><br><p>${recipe.directions}</p>`;
-                htmlString += `</ul>`;
-                $("#recipes").append(htmlString);
+                renderRecipe(recipe);
             });
 
         },
