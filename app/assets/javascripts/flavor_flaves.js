@@ -19,6 +19,11 @@ var attachListeners = function() {
     //     event.preventDefault();
     //     alert("Submitted click");
     // });
+    $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
+        event.preventDefault();
+        alert("Show link clicked");
+
+    });
 
     $("#ingredients_filter").submit(function(event) {
         event.preventDefault();
@@ -69,12 +74,14 @@ var ajaxShow = function(url) {
     $.ajax({
         url: url,
         method: "GET",
-        dataType: "json"
-    }, success : function(response) {
-        console.log(response);
-        debugger;
-    }, error : function(response) {
-        console.log("Error finding recipe.");
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+            debugger;
+        },
+        error: function(response) {
+            console.log("Error finding recipe.");
+        }
     });
 }
 
