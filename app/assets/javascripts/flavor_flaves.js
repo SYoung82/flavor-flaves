@@ -21,7 +21,7 @@ var attachListeners = function() {
     // });
     $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
         event.preventDefault();
-        alert("Show link clicked");
+        ajaxShow(this.pathname);
 
     });
 
@@ -77,7 +77,7 @@ var ajaxShow = function(url) {
         dataType: "json",
         success: function(response) {
             console.log(response);
-            debugger;
+            //debugger;
         },
         error: function(response) {
             console.log("Error finding recipe.");
