@@ -66,11 +66,15 @@ var save = function(event) {
     }
 }
 
+var currentUser = function() {
+    return $(".current-user")[0].id
+}
+
 var renderRecipe = function(recipe) {
     var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
-    htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit">`;
+    htmlString += `<a href="/users/${currentUser}/recipes/${recipe.id}/edit">`;
     recipe.users.forEach(function(recipe_user) {
-        if ($(".current-user")[0].id == recipe_user.id) {
+        if (currentUser() == recipe_user.id) {
             htmlString += `<img alt="Saved" src="/assets/saved.png">`;
         }
     });
