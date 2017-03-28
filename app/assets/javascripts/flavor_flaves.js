@@ -22,7 +22,6 @@ var attachListeners = function() {
     $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
         event.preventDefault();
         ajaxShow(this.pathname);
-
     });
 
     $("#ingredients_filter").submit(function(event) {
@@ -128,10 +127,7 @@ var ajaxGetFiltered = function(ingredient) {
         },
         success: function(response) {
             $("#recipes").empty();
-            response.forEach(function(recipe) {
-                renderRecipe(recipe);
-            });
-
+            response.forEach(recipe => renderRecipe(recipe));
         },
         error: function(err) {
             console.log(err);
