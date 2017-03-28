@@ -67,6 +67,31 @@ var save = function(event) {
     }
 }
 
+var renderRecipe = function(recipe) {
+    var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
+    htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit">`;
+    recipe.users.forEach(function(recipe_user) {
+        if ($(".current-user")[0].id == recipe_user.id) {
+            htmlString += `<img alt="Saved" src="/assets/saved.png">`;
+        }
+    });
+    if (!htmlString.includes("Saved")) {
+        htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
+    }
+    htmlString += `</a></h3><ul>`
+    recipe.ingredients.forEach(function(ingredient) {
+        htmlString += `<li>${ingredient.name}, `;
+        recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
+            if (recipe_ingredient.ingredient_id == ingredient.id) {
+                htmlString += `${recipe_ingredient.quantity}</li>`;
+            }
+        });
+    });
+    htmlString += `</ul><br><p>${recipe.directions}</p>`;
+    htmlString += `</ul>`;
+    $("#recipes").append(htmlString);
+}
+
 ////////////////////////////////////////////////////////////////
 //AJAX queries
 ////////////////////////////////////////////////////////////////
@@ -76,8 +101,8 @@ var ajaxShow = function(url) {
         method: "GET",
         dataType: "json",
         success: function(response) {
-            console.log(response);
-            //debugger;
+            $("#recipes").empty();
+            renderRecipe(response);
         },
         error: function(response) {
             console.log("Error finding recipe.");
@@ -89,7 +114,6 @@ var ajaxGet = function(url) {
     object = $.ajax({url: url, method: "GET", dataType: "json"});
     return object.responseText;
 }
-
 
 //TODO TODO TODO add star next to title of each recipe.
 var ajaxGetFiltered = function(ingredient) {
@@ -108,18 +132,18 @@ var ajaxGetFiltered = function(ingredient) {
                 var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
                 htmlString += `<a href="/users/${$(".current-user")[0].id}/recipes/${recipe.id}/edit">`;
                 recipe.users.forEach(function(recipe_user) {
-                    if($(".current-user")[0].id == recipe_user.id) {
+                    if ($(".current-user")[0].id == recipe_user.id) {
                         htmlString += `<img alt="Saved" src="/assets/saved.png">`;
                     }
                 });
-                if(!htmlString.includes("Saved")) {
+                if (!htmlString.includes("Saved")) {
                     htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
                 }
                 htmlString += `</a></h3><ul>`
                 recipe.ingredients.forEach(function(ingredient) {
                     htmlString += `<li>${ingredient.name}, `;
                     recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
-                        if(recipe_ingredient.ingredient_id == ingredient.id) {
+                        if (recipe_ingredient.ingredient_id == ingredient.id) {
                             htmlString += `${recipe_ingredient.quantity}</li>`;
                         }
                     });
