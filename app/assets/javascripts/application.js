@@ -15,4 +15,3 @@
 
 //= require_tree .
 //= require flavor_flaves
-//= require handlebars.min

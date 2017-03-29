@@ -21,6 +21,7 @@ var attachListeners = function() {
     // });
     $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
         event.preventDefault();
+        console.log("clicked");
         ajaxShow(this.pathname);
     });
 
@@ -71,7 +72,7 @@ var currentUser = function() {
 }
 
 var renderRecipe = function(recipe) {
-    var htmlString = `<li><h3 id=${recipe.id}><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
+    var htmlString = `<li><h3 id=${recipe.id} class="recipe"><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
     htmlString += `<a href="/users/${currentUser}/recipes/${recipe.id}/edit">`;
     recipe.users.forEach(function(recipe_user) {
         if (currentUser() == recipe_user.id) {
@@ -93,6 +94,7 @@ var renderRecipe = function(recipe) {
     htmlString += `</ul><br><p>${recipe.directions}</p>`;
     htmlString += `</ul>`;
     $("#recipes").append(htmlString);
+    attachListeners();
 }
 
 ////////////////////////////////////////////////////////////////
