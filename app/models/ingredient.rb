@@ -12,7 +12,7 @@ class Ingredient < ApplicationRecord
   def set_quantity(recipe, qty)
     ri = RecipeIngredient.find_or_create_by(recipe_id: recipe.id, ingredient_id: self.id)
     ri.quantity = qty
-    binding.pry
+
     if ri.save
       puts "Successful Save"
     else

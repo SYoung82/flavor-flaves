@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
 
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients, dependent: :destroy
-  
+
   has_many :user_recipes
   has_many :users, through: :user_recipes, dependent: :destroy
 
@@ -24,4 +24,18 @@ class Recipe < ApplicationRecord
     end
   end
 
+  def quantity(ingredient)
+    RecipeIngredient.find_by(ingredient_id: ingredient.id, recipe_id: self.id).quantity
+  end
+
+  def set_quantity(ingredient, qty)
+    ri = RecipeIngredient.find_or_create_by(ingredient_id: ingredient.id, recipe_id: self.id)
+    ri.quantity = qty
+
+    if ri.save
+      puts "Successful Save"
+    else
+      puts "Error saving"
+    end
+  end
 end
