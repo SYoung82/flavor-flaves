@@ -12,7 +12,11 @@ $(function(){
         var action = $form.attr("action");
         var params = $form.serialize();
 
-        debugger;
-        $.post(action, params)
+        $.post(action, params, "json")
+          .done(function(response){
+//TODO TODO TODO deal with JSON response            
+            alert(JSON.stringify(response));
+          })
     })
+
 })

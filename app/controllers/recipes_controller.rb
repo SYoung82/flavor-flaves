@@ -35,7 +35,10 @@ class RecipesController < ApplicationController
         if @recipe.save
             build_recipe_ingredients(recipe_params)
             build_default_quantities(@recipe)
-            redirect_to recipe_ingredients_path(@recipe)
+            respond_to do |f|
+              f.html { redirect_to recipe_ingredients_path(@recipe) }
+              f.json { render json: @recipe }
+            end
         else
             render :new
         end

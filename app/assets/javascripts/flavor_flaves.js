@@ -120,7 +120,6 @@ var ajaxGet = function(url) {
     return object.responseText;
 }
 
-//TODO TODO TODO add star next to title of each recipe.
 var ajaxGetFiltered = function(ingredient) {
     $.ajax({
         url: '/recipes',
