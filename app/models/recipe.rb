@@ -8,6 +8,7 @@ class Recipe < ApplicationRecord
   has_many :users, through: :user_recipes, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true
+  accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
   #most_popular returns all most popular recipes based on saves, number of saves can be accessed via
   #recipe.attributes['user_count']
