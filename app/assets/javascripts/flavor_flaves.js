@@ -38,7 +38,7 @@ $(document).ready(function() {
 });
 
 var showTopFive = function() {
-    
+    ajaxGet("/most_popular");
 }
 
 var addNewIngredient = function() {
@@ -121,8 +121,16 @@ var ajaxShow = function(url) {
 }
 
 var ajaxGet = function(url) {
-    object = $.ajax({url: url, method: "GET", dataType: "json"});
-    return object.responseText;
+    $.ajax({url: url,
+            method: "GET",
+            dataType: "json",
+            success: function(data) {
+                $("#recipes").empty();
+                for(let i=0; i<data.length; i++) {
+                  renderRecipe(data[i]);
+                }
+            }
+          });
 }
 
 var ajaxGetFiltered = function(ingredient) {

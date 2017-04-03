@@ -70,6 +70,10 @@ class RecipesController < ApplicationController
 
     def most_popular
         @recipes = Recipe.most_popular(5)
+        respond_to do |f|
+            f.html { render @recipes }
+            f.json { render json: @recipes }
+        end
     end
 
     def submitted_recipes
