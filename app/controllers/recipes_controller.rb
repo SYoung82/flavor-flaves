@@ -32,6 +32,7 @@ class RecipesController < ApplicationController
     def create
         @recipe = current_user.recipes.build(recipe_params)
         @recipe.user_id = current_user[:id]
+        binding.pry
         if @recipe.save
             build_recipe_ingredients(recipe_params)
             build_default_quantities(@recipe)
