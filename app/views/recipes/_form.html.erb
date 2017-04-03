@@ -20,7 +20,7 @@
   <p><%= f.label "Directions" %><br />
   <%= f.text_area :directions, size: "40x15" %></p>
 
-  <p><%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %></p>
+  <!-- <p><%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %></p> -->
 
   <p id="new_ingredients">
     <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
