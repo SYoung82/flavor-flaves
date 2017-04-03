@@ -19,6 +19,10 @@ var attachListeners = function() {
     //     event.preventDefault();
     //     alert("Submitted click");
     // });
+    $("#new_ingredients").on("input", function(event) {
+        console.log("Text Input");
+    });
+
     $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
         event.preventDefault();
         console.log("clicked");
