@@ -19,7 +19,7 @@ var attachListeners = function() {
     //     event.preventDefault();
     //     alert("Submitted click");
     // });
-    $("#new_ingredients").one("input", function(event) {
+    $("#new_ingredients input").one("input", function(event) {
         console.log("Text Input");
         addNewIngredient();
     });
@@ -52,7 +52,7 @@ $(document).ready(function() {
 
 var addNewIngredient = function() {
   var $new_ingredients = $("#new_ingredients");
-  var new_index = $new_ingredients.length
+  var new_index = $("#new_ingredients input").length/2;
   var htmlString = `<br><label for="recipe_ingredients_attributes_${new_index}_New Ingredient:">New ingredient:</label><br>`
   htmlString += `<input placeholder="Name" type="text" name="recipe[ingredients_attributes][${new_index}][name]" id="recipe_ingredients_attributes_${new_index}_name">`
   htmlString += `<input placeholder="Quantity, Ex: '1 tbsp'" type="text" name="recipe[ingredients_attributes][${new_index}][recipe_ingredients_attributes][0][quantity]" id="recipe_ingredients_attributes_${new_index}_recipe_ingredients_attributes_0_quantity">`
