@@ -22,7 +22,7 @@
 
   <p><%= f.collection_check_boxes :ingredient_ids, Ingredient.all, :id, :name %></p>
 
-  <p>
+  <p id="new_ingredients">
     <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
       <%= ingredients_fields.label "New Ingredient:" %><br />
       <%= ingredients_fields.text_field :name, :placeholder => "Name" %>
