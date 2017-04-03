@@ -55,7 +55,7 @@ var addNewIngredient = function() {
   var new_index = $new_ingredients.length
   var htmlString = `<br><label for="recipe_ingredients_attributes_${new_index}_New Ingredient:">New ingredient:</label><br>`
   htmlString += `<input placeholder="Name" type="text" name="recipe[ingredients_attributes][${new_index}][name]" id="recipe_ingredients_attributes_${new_index}_name">`
-  htmlString += `<input placeholder="Quantity, Ex: '1 tbsp'" type="text" name="recipe[ingredients_attributes][${new_index}][recipe_ingredients_attributes][${new_index}][quantity]" id="recipe_ingredients_attributes_${new_index}_recipe_ingredients_attributes_${new_index}_quantity">`
+  htmlString += `<input placeholder="Quantity, Ex: '1 tbsp'" type="text" name="recipe[ingredients_attributes][${new_index}][recipe_ingredients_attributes][0][quantity]" id="recipe_ingredients_attributes_${new_index}_recipe_ingredients_attributes_0_quantity">`
   $new_ingredients.append(htmlString);
 }
 
