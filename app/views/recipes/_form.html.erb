@@ -28,7 +28,7 @@
       <%= ingredients_fields.text_field :name, :placeholder => "Name" %>
 
       <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |recipe_ingredients_fields| %>
-        <%= recipe_ingredients_fields.text_field :quantity, :placeholder => "Quantity, Ex: '1 tbsp'"%><br />
+        <%= recipe_ingredients_fields.text_field :quantity, :placeholder => "Quantity, Ex: '1 tbsp'"%>
       <% end %>
     <% end %></p>
   <button id="new_ingredient_button" type="button">Add'l New Ingredient</button><br />
