@@ -1,5 +1,11 @@
 var attachListeners = function() {
 
+    $("#top5").click(function(event) {
+        event.preventDefault();
+        console.log("Top 5 Clicked");
+        showTopFive();
+    });
+
     $("#new_ingredient_button").click(function(event) {
         console.log("Text Input");
         addNewIngredient();
@@ -30,6 +36,10 @@ var attachListeners = function() {
 $(document).ready(function() {
     attachListeners();
 });
+
+var showTopFive = function() {
+    
+}
 
 var addNewIngredient = function() {
   var $new_ingredients = $("#new_ingredients");
