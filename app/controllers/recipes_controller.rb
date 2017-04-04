@@ -82,6 +82,10 @@ class RecipesController < ApplicationController
             flash[:notice] = "You've not submitted any recipes. Click New Recipe link to get started."
             redirect_to :root
         end
+        respond_to do |f|
+            f.html { render @recipes }
+            f.json { render json: @recipes }
+        end
     end
 
     private
