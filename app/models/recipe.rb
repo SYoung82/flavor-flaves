@@ -19,23 +19,8 @@ class Recipe < ApplicationRecord
     ingredient_attributes.values.each do |ingredient_attribute|
       if ingredient_attribute[:name] != ""
         ingredient = Ingredient.find_or_create_by(name: ingredient_attribute[:name])
-        self.ingredients << ingredient
+        self.ingredients << ingredient unless self.ingredients.include?(ingredient)
       end
-    end
-  end
-
-  def quantity(ingredient)
-    RecipeIngredient.find_by(ingredient_id: ingredient.id, recipe_id: self.id).quantity
-  end
-
-  def set_quantity(ingredient, qty)
-    ri = RecipeIngredient.find_or_create_by(ingredient_id: ingredient.id, recipe_id: self.id)
-    ri.quantity = qty
-
-    if ri.save
-      puts "Successful Save"
-    else
-      puts "Error saving"
     end
   end
 end
