@@ -2,18 +2,15 @@ var attachListeners = function() {
 
     $("#top5").click(function(event) {
         event.preventDefault();
-        console.log("Top 5 Clicked");
         showTopFive();
     });
 
     $("#new_ingredient_button").click(function(event) {
-        console.log("Text Input");
         addNewIngredient();
     });
 
     $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
         event.preventDefault();
-        console.log("clicked");
         ajaxShow(this.pathname);
     });
 
@@ -100,7 +97,7 @@ var renderRecipe = function(recipe) {
     htmlString += `</ul>`;
     debugger;
     if(currentUser() == recipe.user_id) {
-        htmlString += `<button id="${recipe.id}" type="button">Edit This Recipe</button><br>`
+        htmlString += `<a href="/recipes/${recipe.id}/edit" id="${recipe.id}" name="edit">Edit This Recipe</a><br>`
     }
     $("#recipes").append(htmlString);
     attachListeners();
