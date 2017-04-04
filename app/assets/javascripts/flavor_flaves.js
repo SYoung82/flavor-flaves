@@ -1,4 +1,8 @@
 var attachListeners = function() {
+    $("#submitted").click(function(event) {
+        event.preventDefault();
+        showSubmittedRecipes();
+    });
 
     $("#top5").click(function(event) {
         event.preventDefault();
@@ -33,6 +37,10 @@ var attachListeners = function() {
 $(document).ready(function() {
     attachListeners();
 });
+
+var showSubmittedRecipes = function() {
+  
+}
 
 var showTopFive = function() {
     ajaxGet("/most_popular");
@@ -95,7 +103,6 @@ var renderRecipe = function(recipe) {
     });
     htmlString += `</ul><br><p>${recipe.directions}</p>`;
     htmlString += `</ul>`;
-    debugger;
     if(currentUser() == recipe.user_id) {
         htmlString += `<a href="/recipes/${recipe.id}/edit" id="${recipe.id}" name="edit">Edit This Recipe</a><br>`
     }
