@@ -98,6 +98,10 @@ var renderRecipe = function(recipe) {
     });
     htmlString += `</ul><br><p>${recipe.directions}</p>`;
     htmlString += `</ul>`;
+    debugger;
+    if(currentUser() == recipe.user_id) {
+        htmlString += `<button id="${recipe.id}" type="button">Edit This Recipe</button><br>`
+    }
     $("#recipes").append(htmlString);
     attachListeners();
 }
