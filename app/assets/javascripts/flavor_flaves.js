@@ -55,8 +55,12 @@ var attachListeners = function() {
     $("#home").off("click");
     $("#home").click(function(event) {
         console.log("Home clicked");
-        event.preventDefault();
-        ajaxGet(event.toElement.pathname);
+        //If current location is root page prevent default and execute ajax requests
+        //Otherwiser just perform default action which is go to root page.
+        if(location.pathname === "/") {
+            event.preventDefault();
+            ajaxGet(event.toElement.pathname);
+        }
     });
 
     $("#submitted").off("click");
