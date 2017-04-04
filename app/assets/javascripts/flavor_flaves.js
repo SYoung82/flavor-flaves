@@ -24,7 +24,6 @@ class Recipe {
         var recipe = this;
         this.ingredients.forEach(function(ingredient) {
             htmlString += `<li>${ingredient.name}, `;
-            debugger;
             recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
                 if (recipe_ingredient.ingredient_id == ingredient.id) {
                     htmlString += `${recipe_ingredient.quantity}</li>`;
@@ -92,8 +91,6 @@ var showTopFive = function() {
 var addNewIngredient = function() {
   var $new_ingredients = $("#new_ingredients");
   var new_index = $("#new_ingredients input").length/2;
-  // var htmlString = `<br><label for="recipe_ingredients_attributes_${new_index}_New Ingredient:">New ingredient:</label><br>`
-  var htmlString = `<br><input placeholder="Name" type="text" name="recipe[ingredients_attributes][${new_index}][name]" id="recipe_ingredients_attributes_${new_index}_name"> `
   htmlString += `<input placeholder="Quantity, Ex: '1 tbsp'" type="text" name="recipe[ingredients_attributes][${new_index}][recipe_ingredients_attributes][0][quantity]" id="recipe_ingredients_attributes_${new_index}_recipe_ingredients_attributes_0_quantity">`
   $new_ingredients.append(htmlString);
 }
@@ -136,7 +133,8 @@ var ajaxShow = function(url) {
         dataType: "json",
         success: function(response) {
             $("#recipes").empty();
-            renderRecipe(response);
+            let recipe = new Recipe(response);
+            recipe.renderRecipe();
         },
         error: function(response) {
             console.log("Error finding recipe.");
