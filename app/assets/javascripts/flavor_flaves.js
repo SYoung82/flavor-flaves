@@ -13,7 +13,6 @@ class Recipe {
 
     //this.renderRecipe() renders this recipe in HTML and appends to DOM
     renderRecipe() {
-      debugger;
         var htmlString = `<li><h3 id=${this.id} class="recipe"><a href="/recipes/${this.id}">${this.title} </a>`;
         htmlString += `<a href="/users/${currentUser()}/recipes/${this.id}/edit">`;
         this.users.forEach(function(recipe_user) {
@@ -45,6 +44,13 @@ class Recipe {
 }
 
 var attachListeners = function() {
+    $("#home").off("click");
+    $("#home").click(function(event) {
+        console.log("Home clicked");
+        event.preventDefault();
+        ajaxGet(event.toElement.pathname);
+    });
+
     $("#submitted").off("click");
     $("#submitted").click(function(event) {
         console.log("submitted clicked");
