@@ -136,7 +136,7 @@ var filter = function(event) {
 var save = function(event) {
     //Try to save recipe to user
     recipeEditURL = $(event.target).parent()[0].pathname;
-    queryDB(recipeEditURL)
+    ajaxSave(recipeEditURL)
 
     //Switch image
     if ($(event.target)[0].alt == "Unsaved") {
@@ -220,14 +220,5 @@ var ajaxSave = function(url) {
             return true;
         }
     });
-    return false;
-}
-
-var queryDB = function(url) {
-    //Determine the type of query based on caller function
-    query = arguments.callee.caller.name;
-    if (query == "save") {
-        return ajaxSave(url);
-    }
     return false;
 }
