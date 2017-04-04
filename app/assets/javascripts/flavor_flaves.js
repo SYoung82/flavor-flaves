@@ -1,3 +1,13 @@
+class Recipe {
+    constructor(attributes) {
+        this.id = attributes.id;
+        this.title = attributes.title;
+        this.directions = attributes.directions;
+        this.user_id = attributes.user_id;
+        this.ingredients = attributes.ingredients;
+    }
+}
+
 var attachListeners = function() {
     $("#submitted").click(function(event) {
         event.preventDefault();
