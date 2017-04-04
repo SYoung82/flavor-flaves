@@ -15,6 +15,8 @@ class Recipe {
     renderRecipe() {
         var htmlString = `<li><h3 id=${this.id} class="recipe"><a href="/recipes/${this.id}">${this.title} </a>`;
         htmlString += `<a href="/users/${currentUser()}/recipes/${this.id}/edit">`;
+
+        //Check if current user has saved this recipe to determine star icon to use
         this.users.forEach(function(recipe_user) {
             if (currentUser() == recipe_user.id) {
                 htmlString += `<img alt="Saved" src="/assets/saved.png">`;
@@ -24,6 +26,8 @@ class Recipe {
             htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
         }
         htmlString += `</a></h3><ul>`
+
+        //Save this to variable for access inside of the forEach loop below
         var recipe = this;
         this.ingredients.forEach(function(ingredient) {
             htmlString += `<li>${ingredient.name}, `;
@@ -35,6 +39,8 @@ class Recipe {
         });
         htmlString += `</ul><br><p>${recipe.directions}</p>`;
         htmlString += `</ul>`;
+
+        //Check if current user is owner of recipe and if so add edit button
         if(currentUser() == this.user_id) {
             htmlString += `<a href="/recipes/${this.id}/edit" id="${this.id}" name="edit">Edit This Recipe</a><br>`
         }
