@@ -49,6 +49,8 @@ class Recipe {
     }
 }
 
+//Attach listeners, detaches several listeners beforehand to avoid multiple
+//of the same listeners being attached to the same DOM object
 var attachListeners = function() {
     $("#home").off("click");
     $("#home").click(function(event) {
@@ -148,6 +150,7 @@ var save = function(event) {
     }
 }
 
+//Returns id value of current user according to webpage header
 var currentUser = function() {
     return $(".current-user")[0].id
 }
