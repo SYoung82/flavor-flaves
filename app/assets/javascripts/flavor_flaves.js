@@ -13,8 +13,9 @@ class Recipe {
 
     //this.renderRecipe() renders this recipe in HTML and appends to DOM
     renderRecipe() {
+      debugger;
         var htmlString = `<li><h3 id=${this.id} class="recipe"><a href="/recipes/${this.id}">${this.title} </a>`;
-        htmlString += `<a href="/users/${currentUser}/recipes/${this.id}/edit">`;
+        htmlString += `<a href="/users/${currentUser()}/recipes/${this.id}/edit">`;
         this.users.forEach(function(recipe_user) {
             if (currentUser() == recipe_user.id) {
                 htmlString += `<img alt="Saved" src="/assets/saved.png">`;
@@ -80,11 +81,13 @@ var attachListeners = function() {
         filter(event);
     });
 
+    $("img[alt='Saved']").off("click");
     $("img[alt='Saved']").click(function(event) {
         event.preventDefault();
         save(event);
     })
 
+    $("img[alt='Unsaved']").off("click");
     $("img[alt='Unsaved']").click(function(event) {
         event.preventDefault();
         save(event);
@@ -159,7 +162,6 @@ var ajaxShow = function(url) {
 }
 
 var ajaxGet = function(url) {
-    debugger;
     $.ajax({url: url,
             method: "GET",
             dataType: "json",
