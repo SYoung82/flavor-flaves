@@ -22,11 +22,11 @@
 
   <p id="existing_ingredients">
     <%= f.fields_for :ingredients, @recipe.ingredients.all do |ingredients_fields| %>
-    <%= ingredients_fields.text_field :name %>
+      <%= ingredients_fields.text_field :name %>
 
-    <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.all do |recipe_ingredients_fields| %>
-      <%= recipe_ingredients_fields.text_field :quantity %>
-    <% end %>
+      <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.each do |recipe_ingredients_fields| %>
+        <%= recipe_ingredients_fields.text_field :quantity %><br />
+      <% end %>
     <% end %>
   </p>
 
