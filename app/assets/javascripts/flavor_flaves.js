@@ -58,6 +58,13 @@ var attachListeners = function() {
         showTopFive();
     });
 
+    $("#saved").off("click");
+    $("#saved").click(function(event) {
+        console.log("saved recipes clicked");
+        event.preventDefault();
+        ajaxGet(event.toElement.pathname);
+    });
+
     $("#new_ingredient_button").click(function(event) {
         addNewIngredient();
     });
