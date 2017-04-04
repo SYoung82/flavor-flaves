@@ -168,7 +168,10 @@ var ajaxGetFiltered = function(ingredient) {
         },
         success: function(response) {
             $("#recipes").empty();
-            response.forEach(recipe => renderRecipe(recipe));
+            for(let i=0; i<response.length; i++) {
+              let recipe = new Recipe(response[i]);
+              recipe.renderRecipe();
+            }
         },
         error: function(err) {
             console.log(err);
