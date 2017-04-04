@@ -1,4 +1,6 @@
 class Recipe {
+
+    //Recipe constructor takes a hash of attributes
     constructor(attributes) {
         this.id = attributes.id;
         this.title = attributes.title;
@@ -9,6 +11,7 @@ class Recipe {
         this.users = attributes.users;
     }
 
+    //this.renderRecipe() renders this recipe in HTML and appends to DOM
     renderRecipe() {
         var htmlString = `<li><h3 id=${this.id} class="recipe"><a href="/recipes/${this.id}">${this.title} </a>`;
         htmlString += `<a href="/users/${currentUser}/recipes/${this.id}/edit">`;
@@ -42,11 +45,16 @@ class Recipe {
 
 var attachListeners = function() {
     $("#submitted").click(function(event) {
+        console.log("submitted clicked");
         event.preventDefault();
-        showSubmittedRecipes();
+        if(event.handled !== true) {
+            showSubmittedRecipes();
+            event.handled = true;
+        }
     });
 
     $("#top5").click(function(event) {
+        console.log("top5 clicked");
         event.preventDefault();
         showTopFive();
     });
@@ -61,6 +69,7 @@ var attachListeners = function() {
     });
 
     $("#ingredients_filter").submit(function(event) {
+        console.log("ingredients filter clicked");
         event.preventDefault();
         filter(event);
     });
@@ -78,6 +87,7 @@ var attachListeners = function() {
 
 $(document).ready(function() {
     attachListeners();
+    ajaxGet("/recipes");
 });
 
 var showSubmittedRecipes = function() {
@@ -143,6 +153,7 @@ var ajaxShow = function(url) {
 }
 
 var ajaxGet = function(url) {
+    debugger;
     $.ajax({url: url,
             method: "GET",
             dataType: "json",
