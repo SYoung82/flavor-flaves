@@ -39,7 +39,7 @@ $(document).ready(function() {
 });
 
 var showSubmittedRecipes = function() {
-  
+    ajaxGet("/submitted_recipes");
 }
 
 var showTopFive = function() {
@@ -134,6 +134,7 @@ var ajaxGet = function(url) {
             dataType: "json",
             success: function(data) {
                 $("#recipes").empty();
+                debugger;
                 for(let i=0; i<data.length; i++) {
                   renderRecipe(data[i]);
                 }
