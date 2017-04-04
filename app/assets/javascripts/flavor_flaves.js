@@ -5,6 +5,39 @@ class Recipe {
         this.directions = attributes.directions;
         this.user_id = attributes.user_id;
         this.ingredients = attributes.ingredients;
+        this.recipe_ingredients = attributes.recipe_ingredients;
+        this.users = attributes.users;
+    }
+
+    renderRecipe() {
+        var htmlString = `<li><h3 id=${this.id} class="recipe"><a href="/recipes/${this.id}">${this.title} </a>`;
+        htmlString += `<a href="/users/${currentUser}/recipes/${this.id}/edit">`;
+        this.users.forEach(function(recipe_user) {
+            if (currentUser() == recipe_user.id) {
+                htmlString += `<img alt="Saved" src="/assets/saved.png">`;
+            }
+        });
+        if (!htmlString.includes("Saved")) {
+            htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
+        }
+        htmlString += `</a></h3><ul>`
+        var recipe = this;
+        this.ingredients.forEach(function(ingredient) {
+            htmlString += `<li>${ingredient.name}, `;
+            debugger;
+            recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
+                if (recipe_ingredient.ingredient_id == ingredient.id) {
+                    htmlString += `${recipe_ingredient.quantity}</li>`;
+                }
+            });
+        });
+        htmlString += `</ul><br><p>${recipe.directions}</p>`;
+        htmlString += `</ul>`;
+        if(currentUser() == this.user_id) {
+            htmlString += `<a href="/recipes/${this.id}/edit" id="${this.id}" name="edit">Edit This Recipe</a><br>`
+        }
+        $("#recipes").append(htmlString);
+        attachListeners();
     }
 }
 
@@ -91,34 +124,7 @@ var currentUser = function() {
     return $(".current-user")[0].id
 }
 
-var renderRecipe = function(recipe) {
-    var htmlString = `<li><h3 id=${recipe.id} class="recipe"><a href="/recipes/${recipe.id}">${recipe.title} </a>`;
-    htmlString += `<a href="/users/${currentUser}/recipes/${recipe.id}/edit">`;
-    recipe.users.forEach(function(recipe_user) {
-        if (currentUser() == recipe_user.id) {
-            htmlString += `<img alt="Saved" src="/assets/saved.png">`;
-        }
-    });
-    if (!htmlString.includes("Saved")) {
-        htmlString += `<img alt="Unsaved" src="/assets/unsaved.png">`;
-    }
-    htmlString += `</a></h3><ul>`
-    recipe.ingredients.forEach(function(ingredient) {
-        htmlString += `<li>${ingredient.name}, `;
-        recipe.recipe_ingredients.forEach(function(recipe_ingredient) {
-            if (recipe_ingredient.ingredient_id == ingredient.id) {
-                htmlString += `${recipe_ingredient.quantity}</li>`;
-            }
-        });
-    });
-    htmlString += `</ul><br><p>${recipe.directions}</p>`;
-    htmlString += `</ul>`;
-    if(currentUser() == recipe.user_id) {
-        htmlString += `<a href="/recipes/${recipe.id}/edit" id="${recipe.id}" name="edit">Edit This Recipe</a><br>`
-    }
-    $("#recipes").append(htmlString);
-    attachListeners();
-}
+
 
 ////////////////////////////////////////////////////////////////
 //AJAX queries
@@ -144,9 +150,9 @@ var ajaxGet = function(url) {
             dataType: "json",
             success: function(data) {
                 $("#recipes").empty();
-                debugger;
                 for(let i=0; i<data.length; i++) {
-                  renderRecipe(data[i]);
+                  let recipe = new Recipe(data[i]);
+                  recipe.renderRecipe();
                 }
             }
           });
