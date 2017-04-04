@@ -44,15 +44,14 @@ class Recipe {
 }
 
 var attachListeners = function() {
+    $("#submitted").off("click");
     $("#submitted").click(function(event) {
         console.log("submitted clicked");
         event.preventDefault();
-        if(event.handled !== true) {
-            showSubmittedRecipes();
-            event.handled = true;
-        }
+        showSubmittedRecipes();
     });
 
+    $("#top5").off("click");
     $("#top5").click(function(event) {
         console.log("top5 clicked");
         event.preventDefault();
