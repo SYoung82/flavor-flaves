@@ -25,8 +25,9 @@
       <%= ingredients_fields.text_field :name %>
 
       <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.each do |recipe_ingredients_fields| %>
-        <%= recipe_ingredients_fields.text_field :quantity %><br />
+        <%= recipe_ingredients_fields.text_field :quantity %>
       <% end %>
+      <a href="/recipes/<%= @recipe.id %>/ingredients/<%= ingredients_fields.object.id %>"><img alt="Delete" src="/assets/delete.png"></a><br />
     <% end %>
   </p>
 
