@@ -52,6 +52,12 @@ class Recipe {
 //Attach listeners, detaches several listeners beforehand to avoid multiple
 //of the same listeners being attached to the same DOM object
 var attachListeners = function() {
+    $("input[name='commit']").off("click");
+    $("input[name='commit']").click(function(event) {
+        console.log("Submit button clicked");
+        event.preventDefault();
+    });
+
     $('img[alt="Delete"]').off("click");
     $('img[alt="Delete"]').click(function(event) {
         console.log("Delete Ingredient Clicked");
@@ -242,6 +248,7 @@ var ajaxSave = function(url) {
         dataType: "json",
         success: function(data) {
             console.log("Successful save");
+            debugger;
             return true;
         }
     });
