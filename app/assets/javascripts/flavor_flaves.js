@@ -12,7 +12,7 @@ class Recipe {
     }
 
     //this.renderRecipe() renders this recipe in HTML and appends to DOM
-    renderRecipe() {
+    renderRecipe(parent = "#recipes") {
         var htmlString = `<li><h3 id=${this.id} class="recipe"><a href="/recipes/${this.id}">${this.title} </a>`;
         htmlString += `<a href="/users/${currentUser()}/recipes/${this.id}/edit">`;
 
@@ -44,7 +44,7 @@ class Recipe {
         if(currentUser() == this.user_id) {
             htmlString += `<a href="/recipes/${this.id}/edit" id="${this.id}" name="edit">Edit This Recipe</a><br>`
         }
-        $("#recipes").append(htmlString);
+        $(parent).append(htmlString);
         attachListeners();
     }
 }
@@ -56,6 +56,7 @@ var attachListeners = function() {
     $("input[name='commit']").click(function(event) {
         console.log("Submit button clicked");
         event.preventDefault();
+        ajaxSubmit($(this).parent());
     });
 
     $('img[alt="Delete"]').off("click");
@@ -248,11 +249,28 @@ var ajaxSave = function(url) {
         dataType: "json",
         success: function(data) {
             console.log("Successful save");
-            debugger;
             return true;
         }
     });
     return false;
+}
+
+var ajaxSubmit = function(form) {
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        dataType: 'json',
+        data: form.serialize(),
+        success: function(data) {
+            console.log("Success rendering recipe");
+            $('form').remove();
+            let recipe = new Recipe(data);
+            recipe.renderRecipe("body");
+            $('h3').parent().replaceWith(function() {
+                return $("<ul />", {html: $(this).html()});
+            });
+        }
+    })
 }
 
 var ajaxDestroy = function(url) {
