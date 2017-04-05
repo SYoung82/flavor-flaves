@@ -2,8 +2,8 @@ module RecipesHelper
   def build_recipe_ingredients(recipe_params)
     recipe_params[:ingredients_attributes].each do |ingredient_index|
       next unless recipe_params[:ingredients_attributes][ingredient_index][:name] != ''
-      ingredient = Ingredient.find_by(name: recipe_params[:ingredients_attributes][ingredient_index][:name])
-      recipe_ingredient = RecipeIngredient.find_by(recipe_id: @recipe.id, ingredient_id: ingredient.id)
+      ingredient = Ingredient.find_or_create_by(name: recipe_params[:ingredients_attributes][ingredient_index][:name])
+      recipe_ingredient = RecipeIngredient.find_or_create_by(recipe_id: @recipe.id, ingredient_id: ingredient.id)
       recipe_ingredient.quantity = recipe_params[:ingredients_attributes][ingredient_index][:recipe_ingredients_attributes]['0'][:quantity]
       recipe_ingredient.save
     end
