@@ -265,7 +265,7 @@ var ajaxSubmit = function(form) {
             console.log("Success rendering recipe");
             $('form').remove();
             let recipe = new Recipe(data);
-            recipe.renderRecipe("body");
+            recipe.renderRecipe("#recipe");
             $('h3').parent().replaceWith(function() {
                 return $("<ul />", {html: $(this).html()});
             });
