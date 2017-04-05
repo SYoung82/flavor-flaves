@@ -42,7 +42,7 @@ class Recipe {
 
         //Check if current user is owner of recipe and if so add edit button
         if(currentUser() == this.user_id) {
-            htmlString += `<a href="/recipes/${this.id}/edit" id="${this.id}" name="edit">Edit This Recipe</a><br>`
+            htmlString += `<input type="button" onclick="location.pathname='/recipes/${this.id}/edit'" value="Edit This Recipe">`
         }
         $(parent).append(htmlString);
         attachListeners();
