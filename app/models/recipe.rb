@@ -4,10 +4,12 @@ class Recipe < ApplicationRecord
 
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients, dependent: :destroy
+
   has_many :user_recipes
   has_many :users, through: :user_recipes, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true
+  accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 
   #most_popular returns all most popular recipes based on saves, number of saves can be accessed via
   #recipe.attributes['user_count']
@@ -17,9 +19,8 @@ class Recipe < ApplicationRecord
     ingredient_attributes.values.each do |ingredient_attribute|
       if ingredient_attribute[:name] != ""
         ingredient = Ingredient.find_or_create_by(name: ingredient_attribute[:name])
-        self.ingredients << ingredient
+        self.ingredients << ingredient unless self.ingredients.include?(ingredient)
       end
     end
   end
-
 end

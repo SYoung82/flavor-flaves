@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :recipes
   end
 
+  get "/get_user" => "users#get_user", as: 'get_user'
+
   get "/most_popular" => "recipes#most_popular", as: 'most_popular'
 
   get "/submitted_recipes" => "recipes#submitted_recipes", as: 'submitted_recipes'

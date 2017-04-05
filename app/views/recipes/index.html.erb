@@ -1,18 +1,18 @@
 <% if current_user && request.env['PATH_INFO'] != "/users/#{current_user.id}/recipes" %>
-  <form>
+<form id="ingredients_filter">
     <%= select("ingredient", "name", Ingredient.all.collect(&:name), include_blank: 'Select an ingredient to filter') %>
-    <input type="submit" value="Filter" />
-  </form>
+    <input id="ingredients_filter_submit" type="submit" value="Filter"/>
+</form>
 <% end %>
 
 <% if @recipes.empty? %>
-  <h3>No matching recipes found!</h3>
+<h3>No matching recipes found!</h3>
 <% else %>
-  <ul>
+<ul id="recipes">
     <% @recipes.each do |recipe| %>
-      <li>
+    <li>
         <%= render 'recipe', :recipe => recipe %>
-      </li>
+    </li>
     <% end %>
-  </ul><br />
+</ul><br/>
 <% end %>
