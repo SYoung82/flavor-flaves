@@ -103,6 +103,7 @@ var attachListeners = function() {
         addNewIngredient();
     });
 
+    $(".recipe").off("click");
     $(".recipe").on("click", "a[href^='/recipes/']", function(event) {
         event.preventDefault();
         ajaxShow(this.pathname);
