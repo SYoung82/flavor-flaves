@@ -56,6 +56,7 @@ var attachListeners = function() {
     $('img[alt="Delete"]').click(function(event) {
         console.log("Delete Ingredient Clicked");
         event.preventDefault();
+        ajaxDestroy(this.parentNode.pathname);
     });
 
     $("#home").off("click");
@@ -238,4 +239,15 @@ var ajaxSave = function(url) {
         }
     });
     return false;
+}
+
+var ajaxDestroy = function(url) {
+    $.ajax({
+        url: url,
+        method: "DELETE",
+        success: function(data) {
+            console.log("Delete successful");
+            debugger;
+        }
+    });
 }
