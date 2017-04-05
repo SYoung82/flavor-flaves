@@ -143,6 +143,13 @@ var addNewIngredient = function() {
   $new_ingredients.fadeIn(1000);
 }
 
+var destroyIngredient = function(url) {
+    $(`#existing_ingredients a[href='${url}']`).prev().remove();
+    $(`#existing_ingredients a[href='${url}']`).prev().remove();
+    $(`#existing_ingredients a[href='${url}']`).prev().remove();
+    $(`#existing_ingredients a[href='${url}']`).remove();
+}
+
 var filter = function(event) {
     filterIngredient = $("select#ingredient_name").val();
     if (filterIngredient != "") {
@@ -247,7 +254,7 @@ var ajaxDestroy = function(url) {
         method: "DELETE",
         success: function(data) {
             console.log("Delete successful");
-            debugger;
+            destroyIngredient(this.url);
         }
     });
 }
