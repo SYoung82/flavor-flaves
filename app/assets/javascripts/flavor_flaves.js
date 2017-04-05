@@ -109,6 +109,7 @@ var attachListeners = function() {
         ajaxShow(this.pathname);
     });
 
+    $("#ingredients_filter").off("submit")
     $("#ingredients_filter").submit(function(event) {
         console.log("ingredients filter clicked");
         event.preventDefault();
