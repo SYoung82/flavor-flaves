@@ -156,6 +156,8 @@ var destroyIngredient = function(url) {
     $(`#existing_ingredients a[href='${url}']`).prev().remove();
     $(`#existing_ingredients a[href='${url}']`).prev().remove();
     $(`#existing_ingredients a[href='${url}']`).prev().remove();
+    $(`#existing_ingredients a[href='${url}']`).next().remove();
+    $(`#existing_ingredients a[href='${url}']`).next().remove();
     $(`#existing_ingredients a[href='${url}']`).remove();
 }
 
