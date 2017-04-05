@@ -30,12 +30,12 @@ class RecipesController < ApplicationController
     end
 
     def create
-        @recipe = current_user.recipes.build(recipe_params)
+
+        @recipe = current_user.recipes.build(title: params["recipe"]["title"],
+                                             directions: params["recipe"]["directions"])
         @recipe.user_id = current_user[:id]
-        binding.pry
         if @recipe.save
             build_recipe_ingredients(recipe_params)
-            build_default_quantities(@recipe)
             respond_to do |f|
               f.html { redirect_to recipe_ingredients_path(@recipe) }
               f.json { render json: @recipe }
