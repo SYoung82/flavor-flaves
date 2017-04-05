@@ -52,6 +52,12 @@ class Recipe {
 //Attach listeners, detaches several listeners beforehand to avoid multiple
 //of the same listeners being attached to the same DOM object
 var attachListeners = function() {
+    $('img[alt="Delete"]').off("click");
+    $('img[alt="Delete"]').click(function(event) {
+        console.log("Delete Ingredient Clicked");
+        event.preventDefault();
+    });
+
     $("#home").off("click");
     $("#home").click(function(event) {
         console.log("Home clicked");
