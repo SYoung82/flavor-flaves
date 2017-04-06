@@ -52,8 +52,8 @@ class Recipe {
 //Attach listeners, detaches several listeners beforehand to avoid multiple
 //of the same listeners being attached to the same DOM object
 var attachListeners = function() {
-    $("input[name='commit']").off("click");
-    $("input[name='commit']").click(function(event) {
+    $("input[name='commit'][value='Submit']").off("click");
+    $("input[name='commit'][value='Submit']").click(function(event) {
         console.log("Submit button clicked");
         event.preventDefault();
         ajaxSubmit($(this).parent());
@@ -131,7 +131,9 @@ var attachListeners = function() {
 
 $(document).ready(function() {
     attachListeners();
-    ajaxGet("/recipes");
+    if(location.pathname === '/') {
+        ajaxGet("/recipes");
+    }
 });
 
 var showSubmittedRecipes = function() {
@@ -185,7 +187,9 @@ var save = function(event) {
 
 //Returns id value of current user according to webpage header
 var currentUser = function() {
-    return $(".current-user")[0].id
+    if($(".current-user")[0].id){
+        return $(".current-user")[0].id;
+    }
 }
 
 
