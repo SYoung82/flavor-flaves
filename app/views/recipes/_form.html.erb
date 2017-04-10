@@ -16,7 +16,6 @@
 
 <p><%= f.label "Title:" %><br/>
     <%= f.text_field :title %></p>
-d
 <p><%= f.label "Directions" %><br/>
     <%= f.text_area :directions, size: "40x15" %></p>
 
@@ -24,7 +23,7 @@ d
     <%= f.fields_for :ingredients, @recipe.ingredients.all do |ingredients_fields| %>
     <%= ingredients_fields.text_field :name %>
 
-    <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.last do |recipe_ingredients_fields| %>
+    <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.where(ingredient_id: ingredients_fields.object.id) do |recipe_ingredients_fields| %>
     <%= recipe_ingredients_fields.text_field :quantity %>
     <% end %>
     <a href="/recipes/<%= @recipe.id %>/ingredients/<%= ingredients_fields.object.id %>"><img alt="Delete" src="/assets/delete.png"></a><br/>
