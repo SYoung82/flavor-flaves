@@ -41,7 +41,7 @@ class Recipe {
         htmlString += `</ul>`;
 
         //Check if current user is owner of recipe and if so add edit button
-        if(currentUser() == this.user_id) {
+        if (currentUser() == this.user_id) {
             htmlString += `<input type="button" onclick="location.pathname='/recipes/${this.id}/edit'" value="Edit This Recipe">`
         }
         $(parent).append(htmlString);
@@ -71,7 +71,7 @@ var attachListeners = function() {
         console.log("Home clicked");
         //If current location is root page prevent default and execute ajax requests
         //Otherwiser just perform default action which is go to root page.
-        if(location.pathname === "/") {
+        if (location.pathname === "/") {
             event.preventDefault();
             ajaxGet(event.toElement.pathname);
         }
@@ -131,7 +131,7 @@ var attachListeners = function() {
 
 $(document).ready(function() {
     attachListeners();
-    if(location.pathname === '/') {
+    if (location.pathname === '/') {
         ajaxGet("/recipes");
     }
 });
@@ -145,13 +145,13 @@ var showTopFive = function() {
 }
 
 var addNewIngredient = function() {
-  var $new_ingredients = $("#new_ingredients");
-  var new_index = $("#new_ingredients input").length/2;
-  var htmlString = `<br><input placeholder="Name" type="text" name="recipe[ingredients_attributes][${new_index}][name]" id="recipe_ingredients_attributes_${new_index}_name"> `;
-  htmlString += `<input placeholder="Quantity, Ex: '1 tbsp'" type="text" name="recipe[ingredients_attributes][${new_index}][recipe_ingredients_attributes][0][quantity]" id="recipe_ingredients_attributes_${new_index}_recipe_ingredients_attributes_0_quantity">`
-  $new_ingredients.hide();
-  $new_ingredients.append(htmlString);
-  $new_ingredients.fadeIn(1000);
+    var $new_ingredients = $("#new_ingredients");
+    var new_index = $("#new_ingredients input").length / 2;
+    var htmlString = `<br><input placeholder="Name" type="text" name="recipe[ingredients_attributes][${new_index}][name]" id="recipe_ingredients_attributes_${new_index}_name"> `;
+    htmlString += `<input placeholder="Quantity, Ex: '1 tbsp'" type="text" name="recipe[ingredients_attributes][${new_index}][recipe_ingredients_attributes][0][quantity]" id="recipe_ingredients_attributes_${new_index}_recipe_ingredients_attributes_0_quantity">`
+    $new_ingredients.hide();
+    $new_ingredients.append(htmlString);
+    $new_ingredients.fadeIn(1000);
 }
 
 var destroyIngredient = function(url) {
@@ -187,12 +187,10 @@ var save = function(event) {
 
 //Returns id value of current user according to webpage header
 var currentUser = function() {
-    if($(".current-user")[0].id){
+    if ($(".current-user")[0].id) {
         return $(".current-user")[0].id;
     }
 }
-
-
 
 ////////////////////////////////////////////////////////////////
 //AJAX queries
@@ -214,17 +212,18 @@ var ajaxShow = function(url) {
 }
 
 var ajaxGet = function(url) {
-    $.ajax({url: url,
-            method: "GET",
-            dataType: "json",
-            success: function(data) {
-                $("#recipes").empty();
-                for(let i=0; i<data.length; i++) {
-                  let recipe = new Recipe(data[i]);
-                  recipe.renderRecipe();
-                }
+    $.ajax({
+        url: url,
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#recipes").empty();
+            for (let i = 0; i < data.length; i++) {
+                let recipe = new Recipe(data[i]);
+                recipe.renderRecipe();
             }
-          });
+        }
+    });
 }
 
 var ajaxGetFiltered = function(ingredient) {
@@ -239,9 +238,9 @@ var ajaxGetFiltered = function(ingredient) {
         },
         success: function(response) {
             $("#recipes").empty();
-            for(let i=0; i<response.length; i++) {
-              let recipe = new Recipe(response[i]);
-              recipe.renderRecipe();
+            for (let i = 0; i < response.length; i++) {
+                let recipe = new Recipe(response[i]);
+                recipe.renderRecipe();
             }
         },
         error: function(err) {
