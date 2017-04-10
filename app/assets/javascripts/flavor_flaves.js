@@ -129,9 +129,16 @@ var attachListeners = function() {
     })
 }
 
+//Returns id value of current user according to webpage header
+var currentUser = function() {
+    if ($(".current-user")[0].id) {
+        return $(".current-user")[0].id;
+    }
+}
+
 $(document).ready(function() {
     attachListeners();
-    if (location.pathname === '/') {
+    if (location.pathname === '/' && currentUser() != null) {
         ajaxGet("/recipes");
     }
 });
@@ -185,12 +192,6 @@ var save = function(event) {
     }
 }
 
-//Returns id value of current user according to webpage header
-var currentUser = function() {
-    if ($(".current-user")[0].id) {
-        return $(".current-user")[0].id;
-    }
-}
 
 ////////////////////////////////////////////////////////////////
 //AJAX queries
