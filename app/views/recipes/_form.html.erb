@@ -1,47 +1,46 @@
 <%= form_for @recipe do |f| %>
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@recipe.errors.count, "error") %> prohibited
-        this recipe from being saved:
-      </h2>
+<% if @recipe.errors.any? %>
+<div id="error_explanation">
+    <h2>
+        <%= pluralize(@recipe.errors.count, "error") %>
+        prohibited this recipe from being saved:
+    </h2>
 
-      <ul>
-      <% @recipe.errors.full_messages.each do |msg| %>
+    <ul>
+        <% @recipe.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <p><%= f.label "Title:" %><br />
-  <%= f.text_field :title %></p>
-
-  <p><%= f.label "Directions" %><br />
-  <%= f.text_area :directions, size: "40x15" %></p>
-
-  <p id="existing_ingredients">
-    <%= f.fields_for :ingredients, @recipe.ingredients.all do |ingredients_fields| %>
-      <%= ingredients_fields.text_field :name %>
-
-      <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.each do |recipe_ingredients_fields| %>
-        <%= recipe_ingredients_fields.text_field :quantity %>
-      <% end %>
-      <a href="/recipes/<%= @recipe.id %>/ingredients/<%= ingredients_fields.object.id %>"><img alt="Delete" src="/assets/delete.png"></a><br />
-    <% end %>
-  </p>
-
-  <p id="new_ingredients">
-    <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
-      <%= ingredients_fields.label "New Ingredient:" %><br />
-      <%= ingredients_fields.text_field :name, :placeholder => "Name" %>
-
-      <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |recipe_ingredients_fields| %>
-        <%= recipe_ingredients_fields.text_field :quantity, :placeholder => "Quantity, Ex: '1 tbsp'"%>
-      <% end %>
-    <% end %></p>
-  <button id="new_ingredient_button" type="button">Add'l New Ingredient</button><br />
-  <br /><%= f.submit "Submit" %>
+        <% end %>
+    </ul>
+</div>
 <% end %>
-<p id="recipe">
+
+<p><%= f.label "Title:" %><br/>
+    <%= f.text_field :title %></p>
+d
+<p><%= f.label "Directions" %><br/>
+    <%= f.text_area :directions, size: "40x15" %></p>
+
+<p id="existing_ingredients">
+    <%= f.fields_for :ingredients, @recipe.ingredients.all do |ingredients_fields| %>
+    <%= ingredients_fields.text_field :name %>
+
+    <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.last do |recipe_ingredients_fields| %>
+    <%= recipe_ingredients_fields.text_field :quantity %>
+    <% end %>
+    <a href="/recipes/<%= @recipe.id %>/ingredients/<%= ingredients_fields.object.id %>"><img alt="Delete" src="/assets/delete.png"></a><br/>
+    <% end %>
 </p>
+
+<p id="new_ingredients">
+    <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredients_fields| %>
+    <%= ingredients_fields.label "New Ingredient:" %><br/>
+    <%= ingredients_fields.text_field :name, :placeholder => "Name" %>
+
+    <%= ingredients_fields.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |recipe_ingredients_fields| %>
+    <%= recipe_ingredients_fields.text_field :quantity, :placeholder => "Quantity, Ex: '1 tbsp'"%>
+    <% end %>
+    <% end %></p>
+<button id="new_ingredient_button" type="button">Add'l New Ingredient</button><br/>
+<br/><%= f.submit "Submit" %>
+<% end %>
+<p id="recipe"></p>
